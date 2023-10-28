@@ -1,0 +1,1 @@
+create table user(user_id int not null auto_increment, username varchar(20) not null, email varchar(50) not null, password varchar(20) not null, mobile_no varchar(20), age int,primary key(user_id));
