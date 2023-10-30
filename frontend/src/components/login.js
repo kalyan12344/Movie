@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom"; 
 
 const Login=()=>{
     const [username,setUsername]=useState("");
@@ -29,7 +30,8 @@ const Login=()=>{
             <label htmlFor="password" className="form-label">password</label>
             <input type="password" className="form-control" onChange={e=>setPassword(e.target.value)} placeholder='your password' id="password" name="password"/>
             </div>
-            <button type='button' className="btn btn-primary">Log In</button>
+            <button type='submit' className="btn btn-primary">Log In</button>
+            <button type='button' className='btn btn-primary' ><Link to="/register">Sign Up</Link> </button>
 
         </form>
         </>
@@ -37,4 +39,4 @@ const Login=()=>{
     )
 }
 
-export default Register
+export default Login

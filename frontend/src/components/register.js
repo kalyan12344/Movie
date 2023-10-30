@@ -18,6 +18,7 @@ const Register=()=>{
             mobile_no:mobile_no,
             age:age
         }).then(response=>{
+            console.log("going here");
             console.log(response)
         });
       
@@ -47,7 +48,7 @@ const Register=()=>{
             <label htmlFor="age" className="form-label">Age</label>
             <input type="number" className="form-control" onChange={e=>setAge(e.target.value)} placeholder='your age' id="age" name="age"/>
             </div>
-            <button type='button' className="btn btn-primary">Register</button>
+            <button type='submit' className="btn btn-primary" >Register</button>
 
         </form>
         </>
