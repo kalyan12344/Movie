@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import  secureLocalStorage  from  "react-secure-storage";
+
 
 const Showtime = () => {
     const [show_name, setShowName] = useState("");
@@ -37,7 +38,7 @@ const Showtime = () => {
             available_seats: available_seats,
             theater_id: theater_id,
             movie_id: movie_id,
-            admin_id: admin_id,
+            admin_id: secureLocalStorage.getItem("admin_id"),
         };
         console.log("request body is here",showtime)
         Axios.post(`${url}/create`,showtime).then(response => {

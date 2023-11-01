@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom"; 
+import {useNavigate } from "react-router-dom"; 
 
 const Location=()=>{
     const [zipcode,setZipcode]=useState("");
     const [city,setcity]=useState("")
     const [state,setstate]=useState("")
+    const navigate=useNavigate();
     const url="http://localhost:8080/location"
     const locationSubmit=(e)=>{
         e.preventDefault()
@@ -16,6 +17,7 @@ const Location=()=>{
             state:state
         }).then(response=>{
             console.log(response)
+            navigate("/admin/theater")
         });
       
 

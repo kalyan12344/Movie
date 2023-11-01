@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import  secureLocalStorage  from  "react-secure-storage";
+import {useNavigate } from "react-router-dom"; 
 
 const Theater = () => {
     const [theater_name, setTheaterName] = useState("");
@@ -11,11 +12,13 @@ const Theater = () => {
     const [LocationList, setLocationList] = useState([{ 'location_id': '', 'city': '' }])
     const url = "http://localhost:8080/theater"
     const loc_url = "http://localhost:8080/location"
+    const navigate=useNavigate();
 
     useEffect(() => {
         Axios.get(`${loc_url}/get`).then(response => {
             setLocationList(response.data);
             console.log(response.data)
+            navigate("/admin/showtime")
         });
     }, [])
     const TheaterSubmit = (e) => {
@@ -24,7 +27,7 @@ const Theater = () => {
             theater_name: theater_name,
             description: description,
             theater_url: theater_url,
-            admin_id: 1,
+            admin_id: secureLocalStorage.getItem("admin_id"),
             location_id: location_id
         }
         console.log("request body is here",theater)

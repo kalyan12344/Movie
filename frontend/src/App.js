@@ -14,10 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}/>
           <Route path="/register" element={<Register />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/theater" element={<Theater />} />
-          <Route path="/showtime" element={<Showtime />} />
-          <Route path="/movies" element={<Movie />} />
+          <Route path="/admin/location" element={<Location />} />
+          <Route path="/admin/theater" element={<Theater />} />
+          <Route path="/admin/showtime" element={<Showtime />} />
+          <Route path="/admin/movies" element={<Movie />} />
       </Routes>
     </BrowserRouter>
     </div>

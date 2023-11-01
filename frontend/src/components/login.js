@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom"; 
+import { Link,useNavigate } from "react-router-dom"; 
+import  secureLocalStorage  from  "react-secure-storage";
 
 const Login=()=>{
     const [username,setUsername]=useState("");
-    const [password,setPassword]=useState("")
+    const [password,setPassword]=useState("");
+    const navigate=useNavigate();
     const url="http://localhost:8080/user"
     const loginSubmit=(e)=>{
         e.preventDefault()
@@ -13,7 +15,17 @@ const Login=()=>{
             username:username,
             password:password,
         }).then(response=>{
+           if (response.data.message==="Admin logged in successfully"){
+            console.log("admin dashbord")
             console.log(response)
+            secureLocalStorage.setItem("admin_id", response.data.admin_id);
+            navigate("/admin/movies")
+           }
+           else{
+            secureLocalStorage.setItem("admin_id", response.data.user_id);
+            console.log("user dashboard")
+         
+           }
         });
       
 

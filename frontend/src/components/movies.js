@@ -1,6 +1,8 @@
 import React, {useState } from 'react';
 import Axios from 'axios';
+import {useNavigate } from "react-router-dom"; 
 import "bootstrap/dist/css/bootstrap.min.css";
+import  secureLocalStorage  from  "react-secure-storage";
 
 const Movie = () => {
     const [title, setTitle] = useState("");
@@ -12,6 +14,7 @@ const Movie = () => {
     const [end_date, setEndDate] = useState("");
     const [is_completed, setIsCompleted] = useState(false);
     const url = "http://localhost:8080/movie"
+    const navigate=useNavigate();
     
 
     const MovieSubmit = (e) => {
@@ -25,11 +28,11 @@ const Movie = () => {
             release_date: release_date,
             end_date: end_date,
             is_completed: is_completed,
-            admin_id:1
+            admin_id:secureLocalStorage.getItem("admin_id")
         }
         console.log("request body is here",movie)
         Axios.post(`${url}/create`,movie).then(response => {
-            console.log(response)
+            navigate("/admin/location")
         });
 
 

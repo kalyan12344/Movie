@@ -3,3 +3,4 @@ mysql
 dotenv
 
 react-router-dom
+react-secure-storage
