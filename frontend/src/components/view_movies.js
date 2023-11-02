@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-// import "../Styling/view_movies.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "../Styling/view_movies.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const url = "http://localhost:8080/movie";
 
@@ -17,12 +17,12 @@ const MovieList = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="">
       <h2>Movies</h2>
-      <div className="row">
+      <div className="movie-list">
         {movies.map((movie) => (
-          <div key={movie.id} className="col-lg-2 col-md-2 col-sm-2 mb-2">
-            <div className="card">
+          <div key={movie.id} className="">
+            <div className="movie-card">
               <img
                 src={movie.poster_url}
                 className="card-img"
