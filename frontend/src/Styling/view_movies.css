@@ -1,0 +1,23 @@
+/* Example CSS */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.movie-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+
+  max-width: 200px;
+  height: 250px;
+  width: 180px;
+  background-color: #fff;
+  text-align: center; /* Center align the content */
+}
+.movie-card img {
+  max-width: 100%; /* Make sure the image doesn't exceed the container's width */
+  height: 90%; /* Maintain the aspect ratio */
+  margin-bottom: 10px; /* Add some space between the title and the image */
+}
