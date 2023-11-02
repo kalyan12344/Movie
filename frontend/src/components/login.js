@@ -22,7 +22,7 @@ const Login=()=>{
             navigate("/admin/movies")
            }
            else{
-            secureLocalStorage.setItem("admin_id", response.data.user_id);
+            secureLocalStorage.setItem("user_id", response.data.user_id);
             console.log("user dashboard")
          
            }
