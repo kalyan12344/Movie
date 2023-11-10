@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
 
@@ -104,7 +104,7 @@ const Theater = () => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Add the Theater
+          Add Theater
         </button>
       </form>
     </div>

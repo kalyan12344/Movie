@@ -1,8 +1,11 @@
 import React from "react";
 import "../Styling/admin_dash.css";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AdminDashboard = () => {
+  let { username } = useParams();
+
   const categories = [
     { id: 1, title: "Movies" },
     { id: 2, title: "Locations" },
@@ -36,7 +39,7 @@ const AdminDashboard = () => {
   };
   return (
     <div className="admin-dashboard">
-      <h2>Welcome, Kalyan</h2>
+      <h2>Welcome</h2>
       <div className="card-container">
         <div className="card" onClick={() => handleCardClick("Movies")}>
           <h3>Movies</h3>

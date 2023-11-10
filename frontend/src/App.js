@@ -9,6 +9,9 @@ import AddMovie from "./components/add_movies";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MovieList from "./components/view_movies";
 import AdminDashboard from "./components/admin_dash";
+import LocationList from "./components/view_locations";
+import AddLocation from "./components/add_location";
+import UserDashboard from "./components/user_dash";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/admin/AddMovie" element={<AddMovie />} />
           <Route path="/admin/MovieList" element={<MovieList />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/addLocation" element={<AddLocation />} />
+          <Route path="/admin/viewLocations" element={<LocationList />} />
+          <Route path="/user" element={<UserDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>

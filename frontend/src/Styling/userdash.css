@@ -1,0 +1,121 @@
+/* Add this CSS to your component or a separate stylesheet */
+
+/* User Dashboard container */
+div {
+  text-align: start;
+  max-width: 800px;
+  margin: 0 auto;
+}
+/* Style the container of the dropdown */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the dropdown button */
+.dropdown-button {
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style the dropdown items */
+.dropdown-item {
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown content when the button is hovered */
+.dropdown-container:hover .dropdown-content {
+  display: block;
+}
+
+/* Movie list style */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  margin-top: 20px;
+}
+.movie-card {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.movie-details {
+  position: absolute;
+  height: 60px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0 0 8px 8px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.movie-details h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.movie-details button {
+  height: fit-content;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 9px;
+  cursor: pointer;
+  transition: background-color 1s ease;
+}
+
+.movie-card:hover img {
+  transform: translateY(-10px);
+}
+
+.movie-card:hover .movie-details {
+  transform: translateY(0);
+}
+
+.movie-details button:hover {
+  background-color: #0056b3;
+}
