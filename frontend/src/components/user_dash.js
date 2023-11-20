@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import "../Styling/userdash.css";
+import MovieCard from "./moviecard";
+import "../Styling/view_movies.css";
+import MovieDetails from "./movie_details";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
+  const navigate = useNavigate();
+
   const [selectedLocation, setSelectedLocation] = useState();
   const [movies, setMovies] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   useEffect(() => {
-    // Fetch locations from the server
     Axios.get(`http://localhost:8080/location/get`).then((response) => {
       setLocations(response.data);
     });
   }, []);
-  console.log(locations);
+  // console.log(locations);
   useEffect(() => {
     // console.log(selectedLocationId);
     if (selectedLocation) {
-      // Fetch movies for the selected location from the server
-
       Axios.post(`http://localhost:8080/userdash/get`, {
         location: selectedLocation,
       })
@@ -36,6 +41,10 @@ const UserDashboard = () => {
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
     // window.location.reload();
+  };
+
+  const handleCloseDetails = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -76,17 +85,13 @@ const UserDashboard = () => {
           </h3>
           <div className="movie-list">
             {movies.map((movie) => (
-              <div key={movie.id} className="movie-card">
-                <img src={movie.poster_url} />
-                <div className="movie-details">
-                  <h3>{movie.title}</h3>
-                  <button>Details</button>
-                </div>
-              </div>
+              <MovieCard key={movie.movie_id} movie={movie} />
             ))}
           </div>
         </div>
       )}
+
+      {/* {selectedMovie && navigate("/movieDetails/{movie}")} */}
     </div>
   );
 };

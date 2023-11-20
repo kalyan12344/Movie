@@ -33,7 +33,7 @@ const AddMovie = () => {
     console.log("request body is here", movie);
     Axios.post(`${url}/create`, movie)
       .then((response) => {
-        navigate("/admin/location");
+        navigate("/admin/showtime");
       })
       .then((err) => console.log(err));
   };

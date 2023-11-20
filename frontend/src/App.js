@@ -12,6 +12,7 @@ import AdminDashboard from "./components/admin_dash";
 import LocationList from "./components/view_locations";
 import AddLocation from "./components/add_location";
 import UserDashboard from "./components/user_dash";
+import MovieDetails from "./components/movie_details";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
           <Route path="/admin/addLocation" element={<AddLocation />} />
           <Route path="/admin/viewLocations" element={<LocationList />} />
           <Route path="/user" element={<UserDashboard />} />
+          <Route
+            path="/user/movieDetails/:movieId"
+            element={<MovieDetails />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
