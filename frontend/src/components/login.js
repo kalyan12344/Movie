@@ -21,10 +21,14 @@ const Login = () => {
         console.log(response);
         secureLocalStorage.setItem("admin_id", response.data.admin_id);
         navigate("/admin");
+        window.location.reload();
+
       } else {
-        secureLocalStorage.setItem("admin_id", response.data.user_id);
+        secureLocalStorage.setItem("user_id", response.data.user_id);
         console.log("user dashboard");
         navigate("/user");
+        window.location.reload();
+
       }
     });
   };

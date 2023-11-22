@@ -28,4 +28,27 @@ router.post('/create',(req,res,next)=>{
     })
 })
 
+router.get("/movie", (req, res, next) => {
+    // const movieId = req.params.movieId;
+  
+    // Query to get movie details based on movieId
+
+    const query =
+      "select * from movies m join show_time s on s.movie_id = m.movie_id";
+  
+    connection.query(query, (err, results) => {
+      if (!err) {
+        if (results.length > 0) {
+          const genre = results;
+          console.log(results)
+          res.status(200).json(genre);
+        } else {
+          res.status(404).json({ message: "genre not found" });
+        }
+      } else {
+        res.status(500).json(err);
+      }
+    });
+  });
+  
 module.exports=router;

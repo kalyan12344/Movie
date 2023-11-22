@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
+import React, { useState, useEffect } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
-import secureLocalStorage from "react-secure-storage";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import "../Styling/movies.css";
+
+import { Link, useNavigate } from "react-router-dom";
 
 const Theater = () => {
   return (

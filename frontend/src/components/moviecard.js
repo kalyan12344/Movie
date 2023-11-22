@@ -10,17 +10,16 @@ const MovieCard = ({ movie, location }) => {
     console.log(movieId);
     navigate(`/user/movieDetails/${movie.movie_id}`);
   };
-
   const handleMovieCardClick = () => {
     console.log(loc, movie.movie_id);
     navigate(`/user/theaters/${loc}/${movie.movie_id}`);
   };
 
   return (
-    <div className="movie-card">
+    <div className="movie-card"  onClick={() => handleMovieCardClick(loc, movie.movie_id)}>
       <img
         src={movie.poster_url}
-        onClick={() => handleMovieCardClick(loc, movie.movie_id)}
+       
         alt={movie.title}
       />
       <div className="movie-details">

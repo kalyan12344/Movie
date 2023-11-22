@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styling/movies.css";
-
 import { Link, useNavigate } from "react-router-dom";
 
 const MoviesCard = () => {

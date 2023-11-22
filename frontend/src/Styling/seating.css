@@ -1,0 +1,9 @@
+.seat-layout {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent seats from wrapping to the next line */
+}
+
+.seat {
+    /* Your seat styles here */
+    margin-right: 10px; /* Adjust the spacing between seats as needed */
+}

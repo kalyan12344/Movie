@@ -23,6 +23,7 @@ const TheaterInLoc = () => {
     )
       .then((response) => {
         setTheaters(response.data);
+        console.log(response.data)
       })
       .catch((error) => console.error(error));
   }, []);

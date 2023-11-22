@@ -39,5 +39,20 @@ CREATE TABLE actors (
     FOREIGN KEY (movie_person_id) REFERENCES movie_persons(movie_person_id)
 );
 
+create table seat(seat_id int auto_increment,seat_name varchar(5),showtime_id int, is_selected boolean, primary key(seat_id),
+FOREIGN KEY (showtime_id) REFERENCES show_time(show_time_id)
+);
+create table reservations(reservation_id int auto_increment primary key, booking_date date, total_amount int, num_tickets int,user_id int,showtime_id int,
+FOREIGN KEY (showtime_id) REFERENCES show_time(show_time_id),
+foreign key (user_id) references user(user_id));
+
+-- first create reservations table and then tickets table.
+
+create table tickets(ticket_id int auto_increment primary key, ticket_price int, showtime_id int, seat_id int,reservation_id int
+, foreign key(showtime_id) references show_time(show_time_id),
+foreign key(seat_id) references seat(seat_id),
+foreign key(reservation_id) references reservations(reservation_id));
+
+
 
 

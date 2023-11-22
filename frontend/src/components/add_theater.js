@@ -41,8 +41,9 @@ const AddTheater = () => {
   };
 
   return (
-    <div className="card-container">
+    <div className="container">
       <form onSubmit={TheaterSubmit}>
+        <h2 className="mb-4">Theater</h2>
         <div className="mb-3 ">
           <label htmlFor="theater_name" className="form-label">
             Theater Name
@@ -102,12 +103,14 @@ const AddTheater = () => {
             ))}
           </select>
         </div>
-
-        <button type="submit" className="btn btn-primary">
+        <div className="text-center">
+        <button type="submit" className="submit-btn">
           Add Theater
         </button>
+        </div>
       </form>
-    </div>
+      </div>
+
   );
 };
 

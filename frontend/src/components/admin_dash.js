@@ -1,9 +1,13 @@
-import React from "react";
 import "../Styling/admin_dash.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
+import secureLocalStorage from "react-secure-storage";
+
 
 const AdminDashboard = () => {
+
   let { username } = useParams();
 
   const categories = [
@@ -12,7 +16,17 @@ const AdminDashboard = () => {
     { id: 3, title: "Coupons" },
     { id: 4, title: "Theaters" },
   ];
+  const url = "http://localhost:8080/user/admin_id";
   const navigate = useNavigate();
+  const [admin_name, setAdminName] = useState("");
+  useEffect(()=>{
+    Axios.post(`${url}`, {
+      admin_id: secureLocalStorage.getItem("admin_id"),
+    }).then((response) => {
+      console.log(response.data[0].admin_name)
+      setAdminName(response.data[0].admin_name)
+    });
+},[setAdminName]);
   const handleCardClick = (category) => {
     switch (category) {
       case "Movies":
@@ -32,6 +46,10 @@ const AdminDashboard = () => {
         // Navigate to Theaters page
         navigate("/admin/theater");
         break;
+      case "Showtime":
+        // Navigate to Theaters page
+        navigate("/admin/showtime");
+        break;
       default:
         // Handle default case (if needed)
         break;
@@ -39,7 +57,7 @@ const AdminDashboard = () => {
   };
   return (
     <div className="admin-dashboard">
-      <h2>Welcome</h2>
+      <h2>Welcome, {admin_name}</h2>
       <div className="card-container">
         <div className="card" onClick={() => handleCardClick("Movies")}>
           <h3>Movies</h3>
@@ -60,6 +78,13 @@ const AdminDashboard = () => {
           <h3>Theaters</h3>
           <img
             src="https://www.svgrepo.com/show/289363/seats-cinema.svg"
+            className="img"
+          ></img>
+        </div>
+        <div className="card" onClick={() => handleCardClick("Showtime")}>
+          <h3>Showtime</h3>
+          <img
+            src="https://www.svgrepo.com/show/530159/time.svg"
             className="img"
           ></img>
         </div>
