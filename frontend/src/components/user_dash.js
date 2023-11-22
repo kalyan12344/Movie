@@ -14,6 +14,7 @@ const UserDashboard = () => {
   const [locations, setLocations] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  console.log(selectedLocation);
   useEffect(() => {
     Axios.get(`http://localhost:8080/location/get`).then((response) => {
       setLocations(response.data);
@@ -85,7 +86,11 @@ const UserDashboard = () => {
           </h3>
           <div className="movie-list">
             {movies.map((movie) => (
-              <MovieCard key={movie.movie_id} movie={movie} />
+              <MovieCard
+                key={movie.movie_id}
+                movie={movie}
+                location={selectedLocation}
+              />
             ))}
           </div>
         </div>

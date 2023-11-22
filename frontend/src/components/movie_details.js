@@ -3,14 +3,21 @@ import Axios from "axios";
 import { useParams } from "react-router-dom";
 import ActorCard from "./actors";
 import ProducerCard from "./producers";
+import { useNavigate } from "react-router-dom";
+import "../Styling/movie_details.css";
 
 const MovieDetails = (movieID) => {
+  console.log(movieID);
+  const navigate = useNavigate();
   const { movieId } = useParams();
+  console.log(movieId);
   const [movieDetails, setMovieDetails] = useState(null);
   const [actors, setActors] = useState(null);
   const [producers, setProducers] = useState(null);
   const [genre, setGenre] = useState(null);
-
+  const handleBack = () => {
+    navigate(`/user`);
+  };
   console.log(movieId, movieID);
   useEffect(() => {
     // Fetch movie details based on movieId
@@ -42,12 +49,19 @@ const MovieDetails = (movieID) => {
   console.log(actors);
   console.log(producers);
   console.log(genre);
+
   return (
     <div>
-      <h2>Movie Details</h2>
       {movieDetails ? (
         <div>
-          <h1>{movieDetails.title}</h1>
+          <div className="head-back">
+            <h1>{movieDetails.title}</h1>
+            <img
+              onClick={handleBack}
+              src="https://www.svgrepo.com/show/495032/back-square.svg"
+              className="img"
+            ></img>{" "}
+          </div>
           <p></p>
           <p>{movieDetails.description}</p>
           <h3>Director: {movieDetails.director}</h3>

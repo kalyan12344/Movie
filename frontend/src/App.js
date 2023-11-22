@@ -13,7 +13,9 @@ import LocationList from "./components/view_locations";
 import AddLocation from "./components/add_location";
 import UserDashboard from "./components/user_dash";
 import MovieDetails from "./components/movie_details";
-
+import TheaterList from "./components/view_theaters";
+import AddTheater from "./components/add_theater";
+import TheatersInLoc from "./components/theaters_InLoc";
 function App() {
   return (
     <div>
@@ -34,6 +36,12 @@ function App() {
           <Route
             path="/user/movieDetails/:movieId"
             element={<MovieDetails />}
+          />
+          <Route path="/admin/viewTheaters" element={<TheaterList />} />
+          <Route path="/admin/AddTheater" element={<AddTheater />} />
+          <Route
+            path="/user/theaters/:loc/:movieId"
+            element={<TheatersInLoc />}
           />
         </Routes>
       </BrowserRouter>
