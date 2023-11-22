@@ -2,7 +2,7 @@ const express=require('express');
 const connection=require('../config/database')
 const router= express.Router();
 router.get('/get',(req,res,next)=>{
-    var query="select theater_id,theater_name from theater";
+    var query="select * from theater";
     connection.query(query,(err,results)=>{
         if(!err){
             return res.status(200).json(results);
@@ -30,5 +30,7 @@ router.post('/create',(req,res,next)=>{
         }
     })
 })
+
+
 
 module.exports=router;

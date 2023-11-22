@@ -8,9 +8,14 @@ const MovieCard = ({ movie }) => {
     console.log(movieId);
     navigate(`/user/movieDetails/${movie.movie_id}`);
   };
+  const handleCardClick = () => {
+    // You can add additional logic here if needed
+    console.log(`Clicked on ${movie.title}`);
+    navigate(`/user/movieDetails/${movie.movie_id}`);
+  };
 
   return (
-    <div className="movie-card">
+    <div className="movie-card" onClick={handleCardClick}>
       <img src={movie.poster_url} alt={movie.title} />
       <div className="movie-details">
         <h3>{movie.title}</h3>

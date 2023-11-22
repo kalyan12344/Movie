@@ -34,7 +34,7 @@ const AddLocation = () => {
       <form onSubmit={locationSubmit}>
         <div className="form-group">
           <label htmlFor="zipcode" className="label">
-            Zipcodee
+            Zipcode
           </label>
           <input
             type="text"

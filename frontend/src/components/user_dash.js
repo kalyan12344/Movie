@@ -36,7 +36,6 @@ const UserDashboard = () => {
       setMovies([]);
     }
   }, [selectedLocation]);
-  console.log(movies);
 
   const handleLocationChange = (e) => {
     setSelectedLocation(e.target.value);
