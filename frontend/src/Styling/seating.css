@@ -1,9 +1,74 @@
+/* seating.css */
+.seatpicker {
+  /* margin-top: 100px; */
+  padding: 20px;
+  text-align: center;
+}
+
+.seatpicker h2,
+.seatpicker h3 {
+  color: #333;
+}
+
 .seat-layout {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent seats from wrapping to the next line */
+  display: grid;
+  grid-template-columns: repeat(
+    5,
+    1fr
+  ); /* Adjust this as necessary to fit your layout */
+  grid-gap: 10px; /* Adjust the gap as you see fit */
+  margin-bottom: 20px;
 }
 
 .seat {
-    /* Your seat styles here */
-    margin-right: 10px; /* Adjust the spacing between seats as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0; /* Default seat color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.seat:hover {
+  background-color: #e2e2e2; /* Slightly darker on hover */
+}
+
+.seat.selected {
+  background-color: #4caf50 !important; /* Green background for selected seats */
+}
+
+ul {
+  margin-top: 30px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+ul li {
+  /* padding: 5px; */
+  width: 40px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0; /* Default seat color */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: #4caf50;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }

@@ -21,23 +21,24 @@ import TheaterList from "./components/view_theater";
 import Navbar from "./components/navbar";
 import SeatArrangement from "./components/seatpicker";
 import Reservation from "./components/reservation";
+import ShowTimeCard from "./components/showtime_card";
+import ShowTimesTheater from "./components/showTimesForTheater";
 
 function App() {
   return (
     <div className="App">
-          
       <BrowserRouter>
-      <Navbar/>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/location" element={<Location />} />
           <Route path="/admin/theater" element={<Theater />} />
-          <Route path="/admin/AddTheater" element={<AddTheater/>}/>
-          <Route path="/admin/TheaterList" element={<TheaterList/>}/>
+          <Route path="/admin/AddTheater" element={<AddTheater />} />
+          <Route path="/admin/TheaterList" element={<TheaterList />} />
           <Route path="/admin/showtime" element={<Showtime />} />
-          <Route path="/admin/AddShowtime" element={<AddShowtime/>}/>
-          <Route path="/admin/ShowtimeList" element={<ShowtimeList/>}/>
+          <Route path="/admin/AddShowtime" element={<AddShowtime />} />
+          <Route path="/admin/ShowtimeList" element={<ShowtimeList />} />
           <Route path="/admin/movies" element={<Movie />} />
           <Route path="/admin/AddMovie" element={<AddMovie />} />
           <Route path="/admin/MovieList" element={<MovieList />} />
@@ -55,8 +56,15 @@ function App() {
             path="/user/theaters/:loc/:movieId"
             element={<TheatersInLoc />}
           />
-          <Route path="/seats/:showtime_id" element={<SeatArrangement/>}/>
-          <Route path="/reservation/:showtime_id/:total_price/:encodedObject" element={<Reservation/>}/>
+          <Route path="/seats/:showtime_id" element={<SeatArrangement />} />
+          <Route
+            path="/reservation/:showtime_id/:total_price/:encodedObject"
+            element={<Reservation />}
+          />
+          <Route
+            path="/user/showtimetheater/:loc/:movieId/:theaterId/:theaterName"
+            element={<ShowTimesTheater />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

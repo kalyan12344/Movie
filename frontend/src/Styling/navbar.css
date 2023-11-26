@@ -1,0 +1,38 @@
+.custom-navbar {
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right */
+  padding: 0.5rem 1rem;
+  background-color: #007bff; /* Bootstrap primary color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns the link to the right */
+  /* Remove the background color and width from here */
+}
+
+.nav-item {
+  color: white; /* Text color */
+  padding: 0.5rem 0.75rem; /* Similar to Bootstrap's padding for nav items */
+  text-decoration: none; /* Removes underline from link */
+  transition: color 0.2s; /* Smooth transition for hover effect */
+  background-color: #007bff; /* Apply background color directly to the link */
+  margin-left: auto; /* Push the nav-item to the right */
+}
+
+.logout-link:hover,
+.login-link:hover {
+  color: #d4e2ff; /* Lighter blue on hover */
+}
+
+/* Add responsive behavior */
+@media (max-width: 768px) {
+  .custom-navbar {
+    justify-content: center; /* Center the link on smaller screens */
+  }
+
+  .nav-item {
+    margin-left: 0; /* Reset margin-left on smaller screens */
+  }
+}

@@ -109,7 +109,7 @@ div {
 }
 
 .movie-card:hover img {
-  transform: translateY(-10px);
+  transform: scale(0.9);
 }
 
 .movie-card:hover .movie-details {

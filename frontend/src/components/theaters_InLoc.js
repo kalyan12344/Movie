@@ -12,9 +12,8 @@ const TheaterInLoc = () => {
   console.log(loc, movieId);
   const navigate = useNavigate();
   const [theaters, setTheaters] = useState();
-  const handleBack = () => {
-    navigate(`/user`);
-  };
+  const [showTimes, setShowTimes] = useState();
+
   //   console.log(movieId, movieID);
   useEffect(() => {
     // Fetch movie details based on movieId
@@ -23,7 +22,7 @@ const TheaterInLoc = () => {
     )
       .then((response) => {
         setTheaters(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -34,7 +33,12 @@ const TheaterInLoc = () => {
       {theaters ? (
         <div className="movie-list">
           {theaters.map((theater) => (
-            <TheaterCard key={theater.theater_id} theater={theater} />
+            <TheaterCard
+              key={theater.theater_id}
+              theater={theater}
+              movieId={movieId}
+              loc={loc}
+            />
           ))}
         </div>
       ) : (

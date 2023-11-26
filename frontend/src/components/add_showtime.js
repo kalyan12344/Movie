@@ -49,107 +49,109 @@ const AddShowtime = () => {
 
   return (
     <>
-      <div className="container">
-      <h2 className="mb-4">Showtime</h2>
-      <form onSubmit={ShowtimeSubmit}>
-        <div className="mb-3">
-          <label htmlFor="show_name" className="form-label">
-            Show Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            onChange={(e) => setShowName(e.target.value)}
-            placeholder="Enter Show Name"
-            id="show_name"
-            name="show_name"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="start_time" className="form-label">
-            Start Time
-          </label>
-          <input
-            type="time"
-            className="form-control"
-            onChange={(e) => setStartTime(e.target.value)}
-            id="start_time"
-            name="start_time"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="end_time" className="form-label">
-            End Time
-          </label>
-          <input
-            type="time"
-            className="form-control"
-            onChange={(e) => setEndTime(e.target.value)}
-            id="end_time"
-            name="end_time"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="available_seats" className="form-label">
-            Available Seats
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            onChange={(e) => setAvailableSeats(e.target.value)}
-            id="available_seats"
-            name="available_seats"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="theater_id" className="form-label">
-            Theater
-          </label>
-          <select
-            className="form-control"
-            value={theater_id}
-            onChange={(e) => {
-              setTheaterId(e.target.value);
-            }}
-          >
-            <option value="">Choose Theater</option>
+      <div className="">
+        <p></p>
+        <p></p>
+        <h2 className="mb-4">Showtime</h2>
+        <form onSubmit={ShowtimeSubmit}>
+          <div className="mb-3">
+            <label htmlFor="show_name" className="form-label">
+              Show Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              onChange={(e) => setShowName(e.target.value)}
+              placeholder="Enter Show Name"
+              id="show_name"
+              name="show_name"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="start_time" className="form-label">
+              Start Time
+            </label>
+            <input
+              type="time"
+              className="form-control"
+              onChange={(e) => setStartTime(e.target.value)}
+              id="start_time"
+              name="start_time"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="end_time" className="form-label">
+              End Time
+            </label>
+            <input
+              type="time"
+              className="form-control"
+              onChange={(e) => setEndTime(e.target.value)}
+              id="end_time"
+              name="end_time"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="available_seats" className="form-label">
+              Available Seats
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              onChange={(e) => setAvailableSeats(e.target.value)}
+              id="available_seats"
+              name="available_seats"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="theater_id" className="form-label">
+              Theater
+            </label>
+            <select
+              className="form-control"
+              value={theater_id}
+              onChange={(e) => {
+                setTheaterId(e.target.value);
+              }}
+            >
+              <option value="">Choose Theater</option>
 
-            {TheaterList.map((Theater) => (
-              <option value={Theater.theater_id} key={Theater.theater_id}>
-                {Theater.theater_name}
+              {TheaterList.map((Theater) => (
+                <option value={Theater.theater_id} key={Theater.theater_id}>
+                  {Theater.theater_name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="movie_id" className="form-label">
+              Movie
+            </label>
+            <select
+              className="form-control"
+              value={movie_id}
+              onChange={(e) => {
+                setMovieId(e.target.value);
+              }}
+            >
+              <option value="" required>
+                Choose Movie{" "}
               </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="movie_id" className="form-label">
-            Movie
-          </label>
-          <select
-            className="form-control"
-            value={movie_id}
-            onChange={(e) => {
-              setMovieId(e.target.value);
-            }}
-          >
-            <option value="" required>
-              Choose Movie{" "}
-            </option>
 
-            {MovieList.map((Movie) => (
-              <option value={Movie.movie_id} key={Movie.movie_id}>
-                {Movie.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="text-center">
-        <button type="submit" className="submit-btn">
-          Add Showtime
-        </button>
-        </div>
-      </form>
+              {MovieList.map((Movie) => (
+                <option value={Movie.movie_id} key={Movie.movie_id}>
+                  {Movie.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="text-center">
+            <button type="submit" className="submit-btn">
+              Add Showtime
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

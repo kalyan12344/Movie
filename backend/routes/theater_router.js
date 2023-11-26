@@ -19,7 +19,7 @@ router.get("/getTheatersInLoc/:selectedLocation/:movieID", (req, res, next) => {
   console.log(selectedCity, movieId);
   // Query to get movie details based on movieId
   const query =
-    "select * from theater t join location l on t.location_id = l.location_id join show_time st on st.theater_id = t.theater_id join movies m on m.movie_id = st.movie_id where l.city = ? and m.movie_id = ?";
+    "select distinct t.* from theater t join location l on t.location_id = l.location_id join show_time st on st.theater_id = t.theater_id join movies m on m.movie_id = st.movie_id where l.city = ? and m.movie_id = ?";
   connection.query(query, [selectedCity, movieId], (err, results) => {
     if (!err) {
       if (results.length > 0) {

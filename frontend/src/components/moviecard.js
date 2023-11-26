@@ -16,13 +16,13 @@ const MovieCard = ({ movie, location }) => {
   };
 
   return (
-    <div className="movie-card"  onClick={() => handleMovieCardClick(loc, movie.movie_id)}>
+    <div className="cinema-card">
       <img
         src={movie.poster_url}
-       
         alt={movie.title}
+        onClick={() => handleMovieCardClick(loc, movie.movie_id)}
       />
-      <div className="movie-details">
+      <div className="cinema-details">
         <h3>{movie.title}</h3>
         <button onClick={() => handleDetailsClick()}>Details</button>
       </div>

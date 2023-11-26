@@ -1,0 +1,33 @@
+/* showCard.css */
+.show-card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px;
+  width: 200px; /* Adjust the width as you need */
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.show-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.show-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.start-time,
+.end-time {
+  font-weight: 500;
+}
+
+/* Add a hover effect to the card */
+.show-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}

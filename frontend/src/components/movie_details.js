@@ -6,8 +6,8 @@ import ProducerCard from "./producers";
 import { useNavigate } from "react-router-dom";
 import "../Styling/movie_details.css";
 
-const MovieDetails = (movieID) => {
-  console.log(movieID);
+const MovieDetails = () => {
+  console.log();
   const navigate = useNavigate();
   const { movieId } = useParams();
   console.log(movieId);
@@ -18,7 +18,7 @@ const MovieDetails = (movieID) => {
   const handleBack = () => {
     navigate(`/user`);
   };
-  console.log(movieId, movieID);
+  // console.log(movieId, movieID);
   useEffect(() => {
     // Fetch movie details based on movieId
     Axios.get(`http://localhost:8080/movie/${movieId}`)
