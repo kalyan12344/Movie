@@ -20,7 +20,6 @@ router.get(
     const theaterId = req.params.theaterID;
 
     console.log(selectedCity, movieId, theaterId);
-    // Query to get movie details based on movieId
     const query =
       "select distinct st.* from theater t join location l on t.location_id = l.location_id join show_time st on st.theater_id = t.theater_id join movies m on m.movie_id = st.movie_id where l.city = ? and m.movie_id = ? and t.theater_id = ?";
     connection.query(
@@ -70,10 +69,6 @@ router.post("/create", (req, res, next) => {
 });
 
 router.get("/movie", (req, res, next) => {
-  // const movieId = req.params.movieId;
-
-  // Query to get movie details based on movieId
-
   const query =
     "select * from movies m join show_time s on s.movie_id = m.movie_id";
 

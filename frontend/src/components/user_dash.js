@@ -95,7 +95,7 @@ const UserDashboard = () => {
         </div>
       )}
 
-      {/* {selectedMovie && navigate("/movieDetails/{movie}")} */}
+      {selectedMovie && navigate("/movieDetails/{movie}")}
     </div>
   );
 };

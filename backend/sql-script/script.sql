@@ -53,6 +53,8 @@ create table tickets(ticket_id int auto_increment primary key, ticket_price int,
 foreign key(seat_id) references seat(seat_id),
 foreign key(reservation_id) references reservations(reservation_id));
 
+create table coupons(coupon_id int auto_increment primary key, coupon_name varchar(50), coupon_discount int, is_expired boolean, admin_id int , foreign key(admin_id) references admin(admin_id));
+create table user_coupon(uc_id int auto_increment primary key, user_id int, coupon_id int,is_used boolean, foreign key(user_id) references user(user_id),foreign key(coupon_id) references coupons(coupon_id));
 
 
 

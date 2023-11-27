@@ -11,18 +11,6 @@ router.get("/get", (req, res, next) => {
     }
   });
 });
-// router.get('/get/d',(req,res,next)=>{
-//     var query="select * from location";
-//     connection.query(query,(err,results)=>{
-//         if(!err){
-//             return res.status(200).json(results);
-//         }
-//         else{
-//             return res.status(500).json(err)
-
-//         }
-//     })
-// })
 router.post("/create", (req, res, next) => {
   let loc = req.body;
   var query = "insert into location(zipcode,city,state) values(?,?,?)";

@@ -23,6 +23,9 @@ import SeatArrangement from "./components/seatpicker";
 import Reservation from "./components/reservation";
 import ShowTimeCard from "./components/showtime_card";
 import ShowTimesTheater from "./components/showTimesForTheater";
+import AddCoupon from "./components/add_coupon";
+import CouponList from "./components/view_coupon";
+import Coupon from "./components/coupon";
 
 function App() {
   return (
@@ -65,6 +68,10 @@ function App() {
             path="/user/showtimetheater/:loc/:movieId/:theaterId/:theaterName"
             element={<ShowTimesTheater />}
           />
+          <Route path="/admin/coupon"element={<Coupon />}/>
+          <Route path="/admin/addCoupon"element={<AddCoupon />}/>
+          <Route path="/admin/viewCoupon"element={<CouponList />}/>
+
         </Routes>
       </BrowserRouter>
     </div>

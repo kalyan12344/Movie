@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../Styling/seating.css";
+import secureLocalStorage from "react-secure-storage";
 
 const SeatsBooking = () => {
   const { showtime_id } = useParams();
@@ -11,6 +12,7 @@ const SeatsBooking = () => {
   const navigate = useNavigate();
   const url = "http://localhost:8080/seat/get";
   const updateUrl = "http://localhost:8080/seat/update";
+  const couponUrl = "http://localhost:8080/coupon/get"
 
   useEffect(() => {
     loadData();
@@ -91,31 +93,47 @@ const SeatsBooking = () => {
         if (total_price == null) {
           total_price = 0;
         }
-        const confirmationMessage = `For booking of the seats: ${selectedSeats
-          .map((seat) => seat.seat_name)
-          .join(", ")} The toal price is ${total_price} `;
-        if (window.confirm(confirmationMessage)) {
-          Axios.post(updateUrl, { showtime_id, selectedSeats })
-            .then((response) => {
-              console.log(response);
-              // Handle success, e.g., navigate to the booking page
-              // alert('Booking successful! Redirecting to booking page...');
-            })
-            .catch((error) => {
-              console.error("Error updating seats:", error);
-            });
-          alert("Booking confirmed! Redirecting to booking page...");
-          const encodedObject = encodeURIComponent(
-            JSON.stringify(selectedSeats)
-          );
-          navigate(
-            `/reservation/${showtime_id}/${total_price}/${encodedObject}`
-          );
-        } else {
-          // If the user clicks "Cancel" in the confirmation dialog,
-          // you can handle it here, for example, showing a message.
-          alert("Booking canceled.");
-        }
+        const user_id = secureLocalStorage.getItem("user_id");
+        Axios.get(`${couponUrl}/user/${user_id}`)
+          .then((response) => {
+            if (response.data) {
+              const msg = 'You have coupons do you want to use it?'
+              if (window.confirm(msg)) {
+
+              }
+
+              const confirmationMessage = `For booking of the seats: ${selectedSeats
+                .map((seat) => seat.seat_name)
+                .join(", ")} The toal price is ${total_price} `;
+              if (window.confirm(confirmationMessage)) {
+                Axios.post(updateUrl, { showtime_id, selectedSeats })
+                  .then((response) => {
+                    console.log(response);
+                    // Handle success, e.g., navigate to the booking page
+                    // alert('Booking successful! Redirecting to booking page...');
+                  })
+                  .catch((error) => {
+                    console.error("Error updating seats:", error);
+                  });
+                alert("Booking confirmed! Redirecting to booking page...");
+                const encodedObject = encodeURIComponent(
+                  JSON.stringify(selectedSeats)
+                );
+                navigate(
+                  `/reservation/${showtime_id}/${total_price}/${encodedObject}`
+                );
+              } else {
+                // If the user clicks "Cancel" in the confirmation dialog,
+                // you can handle it here, for example, showing a message.
+                alert("Booking canceled.");
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching seat data:", error);
+          });
+
+       
       });
     } else {
       alert("Please select at least one seat.");

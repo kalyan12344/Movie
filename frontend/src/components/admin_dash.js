@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         break;
       case "Coupons":
         // Navigate to Coupons page
-        navigate("/admin/Coupons");
+        navigate("/admin/coupon");
         break;
       case "Theaters":
         // Navigate to Theaters page

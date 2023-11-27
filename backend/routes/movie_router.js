@@ -14,7 +14,6 @@ router.get("/getMovies", (req, res, next) => {
 router.get("/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
-  // Query to get movie details based on movieId
   const query = "SELECT * FROM movies WHERE movie_id = ?";
 
   connection.query(query, [movieId], (err, results) => {
@@ -34,7 +33,6 @@ router.get("/:movieId", (req, res, next) => {
 router.get("/genre/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
-  // Query to get movie details based on movieId
   const query =
     "select g.* from movies m join movie_genre mg on m.movie_id = mg.movie_ID join genre g on g.genre_id = mg.genre_ID where m.movie_id = ?";
 
@@ -55,7 +53,6 @@ router.get("/genre/:movieId", (req, res, next) => {
 router.get("/actors/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
-  // Query to get movie details based on movieId
   const query =
     "select mp.* from movies m join actors a on a.movie_id = m.movie_id join movie_persons mp on mp.movie_person_id = a.movie_person_id where m.movie_id = ?";
 
@@ -76,7 +73,6 @@ router.get("/actors/:movieId", (req, res, next) => {
 router.get("/producer/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
-  // Query to get movie details based on movieId
   const query =
     "select mp.* from movies m join producers p on p.movie_id = m.movie_id join movie_persons mp on mp.movie_person_id = p.movie_person_id where m.movie_id = ? ";
 
