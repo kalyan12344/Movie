@@ -10,10 +10,8 @@ import secureLocalStorage from "react-secure-storage";
 import Modal from "react-modal";
 
 const MovieDetails = () => {
-  console.log();
   const navigate = useNavigate();
   const { movieId } = useParams();
-  console.log(movieId);
   const [movieDetails, setMovieDetails] = useState(null);
   const [actors, setActors] = useState(null);
   const [producers, setProducers] = useState(null);
@@ -27,12 +25,10 @@ const MovieDetails = () => {
   const handleBack = () => {
     navigate(`/user`);
   };
-  // console.log(movieId, movieID);
   useEffect(() => {
     Axios.get(`http://localhost:8080/movie/${movieId}`)
       .then((response) => {
         setMovieDetails(response.data);
-        console.log(response);
       })
 
       .catch((error) => console.error(error));
@@ -42,7 +38,6 @@ const MovieDetails = () => {
     Axios.get(`http://localhost:8080/movie/lang/${movieId}`)
       .then((response) => {
         setLang(response.data);
-        console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, [movieId]);
@@ -67,7 +62,6 @@ const MovieDetails = () => {
     Axios.get(`http://localhost:8080/review/get/${movieId}`)
       .then((response) => {
         setReview(response.data);
-        console.log(response);
       })
       .catch((error) => console.error(error));
   }, [movieId]);
@@ -80,7 +74,6 @@ const MovieDetails = () => {
     setModalIsOpen(false);
   };
   const ReviewSubmit = async (e) => {
-    console.log("here i am");
     e.preventDefault();
     const current_date = new Date();
     const review_date = current_date.getDate();
@@ -104,9 +97,6 @@ const MovieDetails = () => {
       closeModal(); // Close the modal after the state updates
     }
   };
-  console.log(actors);
-  console.log(producers);
-  console.log(genre);
 
   return (
     <div className="movie-details-container">

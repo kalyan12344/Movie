@@ -10,9 +10,7 @@ const url = "http://localhost:8080/movie";
 const MovieList = () => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
-  console.log(movies);
   const handleDetailsClick = (movieId) => {
-    console.log(movieId);
     navigate(`/user/movieDetails/${movieId}`);
   };
 

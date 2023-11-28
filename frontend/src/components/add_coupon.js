@@ -69,7 +69,7 @@ const AddCoupon = () => {
         <input
             type="checkbox"
             className="form-check-input"
-            onChange={(e) => {console.log(e);setIs_expired(e.target.checked)}}
+            onChange={(e) => {setIs_expired(e.target.checked)}}
             id="is_expired"
             name="is_expired"
           />

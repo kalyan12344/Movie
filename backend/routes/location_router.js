@@ -14,13 +14,11 @@ router.get("/get", (req, res, next) => {
 
 router.delete("/delete-location/:locationId", (req, res) => {
   const locationId = req.params.locationId;
-
   connection.beginTransaction((err) => {
     if (err) {
       console.error(err);
       return res.status(500).send("Error starting transaction");
     }
-
     const deleteShowTimeQuery = `
         DELETE FROM show_time 
         WHERE theater_id IN (
@@ -28,7 +26,6 @@ router.delete("/delete-location/:locationId", (req, res) => {
           FROM theater 
           WHERE location_id = ?
         )`;
-
     connection.query(deleteShowTimeQuery, [locationId], (err, result) => {
       if (err) {
         return connection.rollback(() => {
@@ -36,7 +33,6 @@ router.delete("/delete-location/:locationId", (req, res) => {
           res.status(500).send("Error deleting show_time entries");
         });
       }
-
       const deleteTheaterQuery = "DELETE FROM theater WHERE location_id = ?";
       connection.query(deleteTheaterQuery, [locationId], (err, result) => {
         if (err) {
@@ -45,7 +41,6 @@ router.delete("/delete-location/:locationId", (req, res) => {
             res.status(500).send("Error deleting theaters");
           });
         }
-
         const deleteLocationQuery =
           "DELETE FROM location WHERE location_id = ?";
         connection.query(deleteLocationQuery, [locationId], (err, result) => {
@@ -55,7 +50,6 @@ router.delete("/delete-location/:locationId", (req, res) => {
               res.status(500).send("Error deleting location");
             });
           }
-
           connection.commit((err) => {
             if (err) {
               return connection.rollback(() => {
@@ -63,7 +57,6 @@ router.delete("/delete-location/:locationId", (req, res) => {
                 res.status(500).send("Error committing transaction");
               });
             }
-
             res.send("deleted successfully");
           });
         });

@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import ActorCard from "./actors";
-import ProducerCard from "./producers";
-import { useNavigate } from "react-router-dom";
 import "../Styling/movie_details.css";
 import TheaterCard from "./theaterCard";
 
 const TheaterInLoc = () => {
   const { loc, movieId } = useParams();
-  console.log(loc, movieId);
-  const navigate = useNavigate();
   const [theaters, setTheaters] = useState();
-  const [showTimes, setShowTimes] = useState();
 
-  //   console.log(movieId, movieID);
   useEffect(() => {
     // Fetch movie details based on movieId
     Axios.get(
@@ -22,7 +15,6 @@ const TheaterInLoc = () => {
     )
       .then((response) => {
         setTheaters(response.data);
-        console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, []);

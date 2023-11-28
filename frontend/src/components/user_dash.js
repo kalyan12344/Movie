@@ -3,7 +3,6 @@ import Axios from "axios";
 import "../Styling/userdash.css";
 import MovieCard from "./moviecard";
 import "../Styling/view_movies.css";
-import MovieDetails from "./movie_details";
 import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
@@ -14,23 +13,18 @@ const UserDashboard = () => {
   const [locations, setLocations] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  console.log(selectedLocation);
   useEffect(() => {
     Axios.get(`http://localhost:8080/location/get`).then((response) => {
       setLocations(response.data);
     });
   }, []);
-  // console.log(locations);
   useEffect(() => {
-    // console.log(selectedLocationId);
     if (selectedLocation) {
       Axios.post(`http://localhost:8080/userdash/get`, {
         location: selectedLocation,
       })
         .then(
           (response) => setMovies(response.data)
-          // console.log(selectedLocationId)
-          // console.log(response.data);
         )
         .catch((error) => console.error(error));
     } else {
@@ -42,11 +36,6 @@ const UserDashboard = () => {
     setSelectedLocation(e.target.value);
     // window.location.reload();
   };
-
-  const handleCloseDetails = () => {
-    setSelectedMovie(null);
-  };
-
   return (
     <div>
       <h2>User Dashboard</h2>

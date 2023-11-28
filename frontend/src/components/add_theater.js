@@ -20,8 +20,6 @@ const AddTheater = () => {
   useEffect(() => {
     Axios.get(`${loc_url}/get`).then((response) => {
       setLocationList(response.data);
-      console.log(response.data);
-      //   navigate("/admin/showtime");
     });
   }, []);
 
@@ -36,7 +34,6 @@ const AddTheater = () => {
     };
     console.log("request body is here", theater);
     Axios.post(`${url}/create`, theater).then((response) => {
-      console.log(response);
     });
   };
 

@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const ActorCard = ({ actor }) => {
   const navigate = useNavigate();
-  //   const handleDetailsClick = (movieId) => {
-  //     console.log(movieId);
-  //     // navigate(`/user/movieDetails/${movie.movie_id}`);
-  //   };
-
   return (
     <div className="movie-card">
       <img src={actor.image_url} alt={actor.movie_person_name} />

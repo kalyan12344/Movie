@@ -18,16 +18,13 @@ router.post('/update',(req,res,next)=>{
     let selectedSeats=req.body.selectedSeats;
     const seatIds = selectedSeats.map(seat => seat.seat_id);
     const seatIdsTuple = `(${seatIds.join(', ')})`;
-    console.log(seatIdsTuple,show_time)
      query=`update seat set is_selected=true where seat_id in ${seatIdsTuple} and showtime_id=${show_time}`
-     console.log(query)
     connection.query(query,(err,results)=>{
         if(!err){
             return res.status(200).json({results});
         }
         else{
             return res.status(500).json(err)
-
         }
     })
 })

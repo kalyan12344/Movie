@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const ProducerCard = ({ producer }) => {
   const navigate = useNavigate();
-  //   const handleDetailsClick = (movieId) => {
-  //     console.log(movieId);
-  //     // navigate(`/user/movieDetails/${movie.movie_id}`);
-  //   };
 
   return (
     <div className="movie-card">

@@ -64,7 +64,6 @@ router.post('/register',(req,res,next)=>{
 })
 
 router.post('/login',(req,res,next)=>{
-    console.log("here")
     let user=req.body;
     var query=`select * from user where username=? and password=?`
     connection.query(query,[user.username,user.password],(err,results)=>{

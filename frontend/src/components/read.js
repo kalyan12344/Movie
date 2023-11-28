@@ -10,7 +10,6 @@ const LoginUser=()=>{
     }
     useEffect(()=>{
         getData();
-        console.log(data)
     },[]);
     return(
         <div>

@@ -1,13 +1,11 @@
 import "../Styling/showcard.css";
 // import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import Axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ShowTimeCard = ({ showtime }) => {
   const navigate = useNavigate();
   const show_time = showtime;
-  // console.log(show_time);
 
   const handleShowTimeClick = (showTime) => {
     navigate(`/seats/${showTime.show_time_id}`);

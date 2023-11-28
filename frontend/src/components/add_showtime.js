@@ -23,11 +23,9 @@ const AddShowtime = () => {
   useEffect(() => {
     Axios.get(`${theater_url}/get`).then((response) => {
       setTheaterList(response.data);
-      console.log(response.data);
     });
     Axios.get(`${movie_url}/getMovies`).then((response) => {
       setMovieList(response.data);
-      console.log(response.data);
     });
   }, []);
   const ShowtimeSubmit = (e) => {
@@ -43,7 +41,6 @@ const AddShowtime = () => {
     };
     console.log("request body is here", showtime);
     Axios.post(`${url}/create`, showtime).then((response) => {
-      console.log(response);
     });
   };
 

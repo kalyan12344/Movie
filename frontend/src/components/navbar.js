@@ -19,7 +19,6 @@ const Navbar = () => {
   }, [logged]);
   const handleLogout = (e) => {
     // e.preventDefault();
-    console.log("Logout clicked");
     if (secureLocalStorage.getItem("admin_id")) {
       secureLocalStorage.removeItem("admin_id");
     } else {

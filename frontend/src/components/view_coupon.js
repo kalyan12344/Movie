@@ -10,7 +10,6 @@ const CouponList = () => {
   useEffect(() => {
     Axios.get(`${url}/get/user`)
       .then((response) => {
-        console.log(response)
         setCoupons(response.data);
       })
       .then((err) => console.log(err));

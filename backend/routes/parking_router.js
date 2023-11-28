@@ -13,7 +13,7 @@ router.get("/get/:theaterId", (req, res, next) => {
 
         res.status(200).json(parking);
       } else {
-        res.status(404).json({ message: "Movie not found" });
+        res.status(404).json({ message: "Parking Area not found" });
       }
     } else {
       res.status(500).json(err);

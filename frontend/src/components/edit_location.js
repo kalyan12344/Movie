@@ -17,7 +17,6 @@ const EditLocation = () => {
   useEffect(() => {
     Axios.get(`${url}/getLoc/${locationId}`)
       .then((response) => {
-        console.log(response.data);
         setLocation(response.data);
       })
       .catch((err) => console.log(err));

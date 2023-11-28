@@ -17,7 +17,6 @@ const AddLocation = () => {
       city: city,
       state: state,
     }).then((response) => {
-      console.log(response);
       setZipcode("");
       setcity("");
       setstate("");

@@ -28,7 +28,6 @@ const EditMovie = () => {
       .catch((err) => console.log(err));
   }, [movieId]);
 
-  console.log(movieDetails);
 
   const handleChange = (event) => {
     setMovieDetails({
