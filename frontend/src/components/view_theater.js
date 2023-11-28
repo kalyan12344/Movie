@@ -51,7 +51,7 @@ const TheaterList = () => {
                   onClick={() => handleEdit(theater.theater_id)}
                 >
                   <img
-                    style={{ width: "25px" }}
+                    style={{ width: "25px", height: "30px" }}
                     src="https://www.svgrepo.com/show/503019/edit.svg"
                   />
                 </button>
@@ -60,7 +60,7 @@ const TheaterList = () => {
                   onClick={() => handleDelete(theater.theater_id)}
                 >
                   <img
-                    style={{ width: "25px" }}
+                    style={{ width: "25px", height: "30px" }}
                     src="https://www.svgrepo.com/show/490950/delete.svg"
                   />
                 </button>
