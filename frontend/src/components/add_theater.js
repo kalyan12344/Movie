@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import secureLocalStorage from "react-secure-storage";
 import { useNavigate } from "react-router-dom";
+import "../Styling/AddTheater.css"; // Import your CSS file
 
 const AddTheater = () => {
   const [locations, setLocations] = useState([]);
@@ -21,7 +21,6 @@ const AddTheater = () => {
     Axios.get(`${loc_url}/get`).then((response) => {
       setLocationList(response.data);
       console.log(response.data);
-      //   navigate("/admin/showtime");
     });
   }, []);
 
@@ -41,10 +40,10 @@ const AddTheater = () => {
   };
 
   return (
-    <div className="container">
-      <form onSubmit={TheaterSubmit}>
-        <h2 className="mb-4">Theater</h2>
-        <div className="mb-3 ">
+    <div className="add-theater-container">
+      <form onSubmit={TheaterSubmit} className="theater-form">
+        <h2 className="form-title mb-4">Add Theater</h2>
+        <div className="">
           <label htmlFor="theater_name" className="form-label">
             Theater Name
           </label>
@@ -57,7 +56,7 @@ const AddTheater = () => {
             name="theater_name"
           />
         </div>
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="description" className="form-label">
             Describe the theater
           </label>
@@ -70,7 +69,7 @@ const AddTheater = () => {
             name="description"
           />
         </div>
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="theater_url" className="form-label">
             Theater Picture
           </label>
@@ -83,7 +82,7 @@ const AddTheater = () => {
             name="theater_url"
           />
         </div>
-        <div className="mb-3">
+        <div className="">
           <label htmlFor="location_id" className="form-label">
             Location
           </label>
@@ -104,13 +103,12 @@ const AddTheater = () => {
           </select>
         </div>
         <div className="text-center">
-        <button type="submit" className="submit-btn">
-          Add Theater
-        </button>
+          <button type="submit" className="submit-btn">
+            Add Theater
+          </button>
         </div>
       </form>
-      </div>
-
+    </div>
   );
 };
 
