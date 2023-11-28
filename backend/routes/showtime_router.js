@@ -68,6 +68,22 @@ router.put("/:showtimeId", (req, res) => {
     }
   );
 });
+router.post("/seats/update", (req, res) => {
+  const {showtime_id,totalseats}=req.body
+  const query =
+    `UPDATE show_time SET available_seats = ? WHERE show_time_id = ?`;
+  connection.query(
+    query,
+    [totalseats,showtime_id],
+    (err, result) => {
+      if (err) {
+        return res.status(500).send(err.message);
+      }
+      res.send("Showtime updated successfully");
+    }
+  );
+});
+
 router.post("/create", (req, res, next) => {
   let show_time = req.body;
   var query =
