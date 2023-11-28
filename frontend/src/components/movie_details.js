@@ -20,8 +20,8 @@ const MovieDetails = () => {
   const [genre, setGenre] = useState(null);
   const [lang, setLang] = useState(null);
   const [reviews, setReview] = useState(null);
-  const [movie_rating, setMovieRating] = useState([]);
-  const [comment, setComments] = useState([]);
+  const [movie_rating, setMovieRating] = useState("");
+  const [comment, setComments] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleBack = () => {
@@ -79,7 +79,7 @@ const MovieDetails = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-  const ReviewSubmit = (e) => {
+  const ReviewSubmit = async (e) => {
     console.log("here i am");
     e.preventDefault();
     const current_date = new Date();
@@ -91,14 +91,18 @@ const MovieDetails = () => {
       user_id: secureLocalStorage.getItem("user_id"),
       movie_id: movieId,
     };
-    console.log("request body is here", review);
-    Axios.post(`http://localhost:8080/review/create`, review)
-      .then((response) => {
-        console.log(response);
-        alert("movie review added successfully");
-        closeModal();
-      })
-      .then((err) => console.log(err));
+    try {
+      const response = await Axios.post(
+        "http://localhost:8080/review/create",
+        review
+      );
+      navigate("/user");
+      alert("Movie review added successfully");
+    } catch (error) {
+      console.error("Error adding review:", error);
+    } finally {
+      closeModal(); // Close the modal after the state updates
+    }
   };
   console.log(actors);
   console.log(producers);
@@ -194,7 +198,6 @@ const MovieDetails = () => {
             <p>Movie Rating: {review.movie_rating}</p>
             <p>Review Date: {review.review_date}</p>
             <p>User Name: {review.username}</p>
-            {/* Add more details as needed */}
           </div>
         ))}
       </div>
@@ -205,9 +208,9 @@ const MovieDetails = () => {
         contentLabel="Coupon Selection Modal"
         style={{
           content: {
-            width: "75%", // Adjust the width as needed
+            width: "75%",
             height: "50%",
-            margin: "auto", // Center the modal horizontally
+            margin: "auto",
           },
         }}
       >
