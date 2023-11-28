@@ -30,6 +30,41 @@ router.get("/:movieId", (req, res, next) => {
   });
 });
 
+router.put("/:movieId", (req, res) => {
+  const movieId = req.params.movieId;
+  const {
+    title,
+    poster_url,
+    description,
+    director,
+    duration,
+    release_date,
+    end_date,
+    is_completed,
+  } = req.body;
+  const sqlQuery =
+    "UPDATE movies SET title = ?, poster_url = ?, description = ?, director = ?, duration = ?, release_date = ?, end_date = ?, is_completed = ? WHERE movie_id = ?";
+
+  connection.query(
+    sqlQuery,
+    [
+      title,
+      poster_url,
+      description,
+      director,
+      duration,
+      release_date,
+      end_date,
+      is_completed,
+      movieId,
+    ],
+    (err, result) => {
+      if (err) res.status(500).send(err);
+      res.json({ message: "Movie updated successfully." });
+    }
+  );
+});
+
 router.get("/genre/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 

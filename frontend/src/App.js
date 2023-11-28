@@ -26,6 +26,10 @@ import ShowTimesTheater from "./components/showTimesForTheater";
 import AddCoupon from "./components/add_coupon";
 import CouponList from "./components/view_coupon";
 import Coupon from "./components/coupon";
+import EditMovie from "./components/editMovie";
+import EditLocation from "./components/edit_location";
+import EditTheater from "./components/editTheater";
+import EditShowtime from "./components/editShowTime";
 
 function App() {
   return (
@@ -53,6 +57,11 @@ function App() {
             path="/user/movieDetails/:movieId"
             element={<MovieDetails />}
           />
+          <Route path="/editMovie/:movieId" element={<EditMovie />} />
+          <Route path="/edit-location/:locationId" element={<EditLocation />} />
+          <Route path="/edit-theater/:theaterId" element={<EditTheater />} />
+          <Route path="/edit-showtime/:showId" element={<EditShowtime />} />
+
           <Route path="/admin/viewTheaters" element={<TheaterList />} />
           <Route path="/admin/AddTheater" element={<AddTheater />} />
           <Route
@@ -68,10 +77,9 @@ function App() {
             path="/user/showtimetheater/:loc/:movieId/:theaterId/:theaterName"
             element={<ShowTimesTheater />}
           />
-          <Route path="/admin/coupon"element={<Coupon />}/>
-          <Route path="/admin/addCoupon"element={<AddCoupon />}/>
-          <Route path="/admin/viewCoupon"element={<CouponList />}/>
-
+          <Route path="/admin/coupon" element={<Coupon />} />
+          <Route path="/admin/addCoupon" element={<AddCoupon />} />
+          <Route path="/admin/viewCoupon" element={<CouponList />} />
         </Routes>
       </BrowserRouter>
     </div>

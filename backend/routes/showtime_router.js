@@ -40,7 +40,50 @@ router.get(
     );
   }
 );
+router.get("/:showtimeId", (req, res) => {
+  const showtimeId = req.params.showtimeId;
+  const query = "SELECT * FROM show_time WHERE show_time_id = ?";
+  connection.query(query, [showtimeId], (err, result) => {
+    if (err) {
+      return res.status(500).send(err.message);
+    }
+    res.json(result[0]);
+  });
+});
 
+router.put("/:showtimeId", (req, res) => {
+  const showtimeId = req.params.showtimeId;
+  const {
+    show_name,
+    start_time,
+    end_time,
+    available_seats,
+    theater_id,
+    movie_id,
+    admin_id,
+  } = req.body;
+  const query =
+    "UPDATE show_time SET show_name = ?, start_time = ?, end_time = ?, available_seats = ?, theater_id = ?, movie_id = ?, admin_id = ? WHERE show_time_id = ?";
+  connection.query(
+    query,
+    [
+      show_name,
+      start_time,
+      end_time,
+      available_seats,
+      theater_id,
+      movie_id,
+      admin_id,
+      showtimeId,
+    ],
+    (err, result) => {
+      if (err) {
+        return res.status(500).send(err.message);
+      }
+      res.send("Showtime updated successfully");
+    }
+  );
+});
 router.post("/create", (req, res, next) => {
   let show_time = req.body;
   var query =
@@ -68,22 +111,47 @@ router.post("/create", (req, res, next) => {
   );
 });
 
-router.get("/movie", (req, res, next) => {
-  const query =
-    "select * from movies m join show_time s on s.movie_id = m.movie_id";
+router.delete("/delete/:showId", (req, res) => {
+  const showId = req.params.showId;
 
-  connection.query(query, (err, results) => {
-    if (!err) {
-      if (results.length > 0) {
-        const genre = results;
-        console.log(results);
-        res.status(200).json(genre);
-      } else {
-        res.status(404).json({ message: "genre not found" });
-      }
-    } else {
-      res.status(500).json(err);
+  connection.beginTransaction((err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("Error starting transaction");
     }
+
+    const deleteResQuery =
+      "UPDATE reservations SET showtime_id = NULL WHERE showtime_id = ?";
+    connection.query(deleteResQuery, [showId], (err, result) => {
+      if (err) {
+        return connection.rollback(() => {
+          console.error(err);
+          res.status(500).send("Error deleting showtimes");
+        });
+      }
+
+      const deleteSTQuery = "DELETE FROM show_time WHERE show_time_id = ?";
+      connection.query(deleteSTQuery, [showId], (err, result) => {
+        if (err) {
+          return connection.rollback(() => {
+            console.error(err);
+            res.status(500).send("Error deleting theater");
+          });
+        }
+
+        connection.commit((err) => {
+          if (err) {
+            return connection.rollback(() => {
+              console.error(err);
+              res.status(500).send("Error committing transaction");
+            });
+          }
+          res.send(
+            "show time and associated reservations deleted successfully"
+          );
+        });
+      });
+    });
   });
 });
 

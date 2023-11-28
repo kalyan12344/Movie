@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const ShowTimeCard = ({ showtime }) => {
   const navigate = useNavigate();
   const show_time = showtime;
-  console.log(show_time.show_time_id);
+  console.log(show_time);
 
   const handleShowTimeClick = (showTime) => {
     navigate(`/seats/${showTime.show_time_id}`);
@@ -19,6 +19,7 @@ const ShowTimeCard = ({ showtime }) => {
       <div className="show-time">
         <span className="start-time">{showtime.start_time}</span> -
         <span className="end-time">{showtime.end_time}</span>
+        <span className="seats"> TotalSeats : {showtime.available_seats}</span>
       </div>
     </div>
   );

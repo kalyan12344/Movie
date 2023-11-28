@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import "../Styling/view_movies.css";
+import "../Styling/view_movies_adm.css";
+import { useNavigate } from "react-router-dom";
+
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 const url = "http://localhost:8080/movie";
 
 const MovieList = () => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
+  console.log(movies);
+  const handleDetailsClick = (movieId) => {
+    console.log(movieId);
+    navigate(`/user/movieDetails/${movieId}`);
+  };
+
+  const handleEdit = (movieId) => {
+    navigate(`/editMovie/${movieId}`);
+  };
 
   useEffect(() => {
     Axios.get(`${url}/getMovies`)
@@ -22,14 +34,19 @@ const MovieList = () => {
       <div className="movie-list">
         {movies.map((movie) => (
           <div key={movie.id} className="">
-            <div className="movie-card">
-              <img
-                src={movie.poster_url}
-                className="card-img"
-                alt={movie.title}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{movie.title}</h5>
+            <img
+              src="https://www.svgrepo.com/show/521620/edit.svg"
+              className="edit"
+              onClick={() => handleEdit(movie.movie_id)}
+            />
+
+            <div className="cinema-card">
+              <img src={movie.poster_url} className="" alt={movie.title} />
+              <div className="cinema-details">
+                <h5 className="">{movie.title}</h5>
+                <button onClick={() => handleDetailsClick(movie.movie_id)}>
+                  Details
+                </button>
               </div>
             </div>
           </div>

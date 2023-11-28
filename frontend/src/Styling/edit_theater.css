@@ -1,0 +1,41 @@
+.edit-theater-container {
+  max-width: 600px;
+  margin-top: 50px;
+  /* margin: 0 auto; */
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-theater-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-theater-form .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-theater-form .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-edit-theater {
+  /* display: block; */
+  width: 50%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-edit-theater:hover {
+  background-color: #0056b3;
+}
