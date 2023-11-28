@@ -68,7 +68,7 @@ function App() {
             path="/user/theaters/:loc/:movieId"
             element={<TheatersInLoc />}
           />
-          <Route path="/seats/:showtime_id" element={<SeatArrangement />} />
+          <Route path="/seats/:showtime_id/:available_seats" element={<SeatArrangement />} />
           <Route
             path="/reservation/:showtime_id/:total_price/:encodedObject"
             element={<Reservation />}

@@ -27,7 +27,8 @@ ORDER BY
 });
 router.get("/get/user/:user_id", (req, res, next) => {
   user_id=req.params.user_id
-  var query = `select * from user_coupon uc  join coupons c on c.coupon_id=uc.coupon_id where uc.is_used=0 and c.is_expired=0 and uc.user_id=${user_id}`;
+  var query = `select * from user_coupon uc  
+  join coupons c on c.coupon_id=uc.coupon_id where uc.is_used=0 and c.is_expired=0 and uc.user_id=${user_id}`;
   connection.query(query, (err, results) => {
     if (!err) {
       return res.status(200).json(results);

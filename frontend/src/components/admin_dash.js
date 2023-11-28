@@ -23,14 +23,12 @@ const AdminDashboard = () => {
     Axios.post(`${url}`, {
       admin_id: secureLocalStorage.getItem("admin_id"),
     }).then((response) => {
-      console.log(response.data[0].admin_name)
       setAdminName(response.data[0].admin_name)
     });
 },[setAdminName]);
   const handleCardClick = (category) => {
     switch (category) {
       case "Movies":
-        console.log("MOVIES");
         navigate("/admin/movies");
 
         break;

@@ -13,9 +13,7 @@ router.get("/getMovies", (req, res, next) => {
 });
 router.get("/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
-
   const query = "SELECT * FROM movies WHERE movie_id = ?";
-
   connection.query(query, [movieId], (err, results) => {
     if (!err) {
       if (results.length > 0) {
@@ -32,32 +30,12 @@ router.get("/:movieId", (req, res, next) => {
 
 router.put("/:movieId", (req, res) => {
   const movieId = req.params.movieId;
-  const {
-    title,
-    poster_url,
-    description,
-    director,
-    duration,
-    release_date,
-    end_date,
-    is_completed,
-  } = req.body;
+  const { title, poster_url, description, director, duration, release_date, end_date, is_completed} = req.body;
   const sqlQuery =
-    "UPDATE movies SET title = ?, poster_url = ?, description = ?, director = ?, duration = ?, release_date = ?, end_date = ?, is_completed = ? WHERE movie_id = ?";
-
+    `UPDATE movies SET title = ?, poster_url = ?, description = ?, director = ?, duration = ?, 
+    release_date = ?, end_date = ?, is_completed = ? WHERE movie_id = ?`;
   connection.query(
-    sqlQuery,
-    [
-      title,
-      poster_url,
-      description,
-      director,
-      duration,
-      release_date,
-      end_date,
-      is_completed,
-      movieId,
-    ],
+    sqlQuery,[title,poster_url, description, director, duration, release_date, end_date, is_completed, movieId],
     (err, result) => {
       if (err) res.status(500).send(err);
       res.json({ message: "Movie updated successfully." });
@@ -69,8 +47,8 @@ router.get("/genre/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
   const query =
-    "select g.* from movies m join movie_genre mg on m.movie_id = mg.movie_ID join genre g on g.genre_id = mg.genre_ID where m.movie_id = ?";
-
+    `select g.* from movies m join movie_genre mg on m.movie_id = mg.movie_ID 
+    join genre g on g.genre_id = mg.genre_ID where m.movie_id = ?`;
   connection.query(query, [movieId], (err, results) => {
     if (!err) {
       if (results.length > 0) {
@@ -87,10 +65,9 @@ router.get("/genre/:movieId", (req, res, next) => {
 
 router.get("/lang/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
-
   const query =
-    "select l.* from movies m join movie_language ml on m.movie_id = ml.movie_ID join language l on l.lang_id = ml.language_ID where m.movie_id = ?";
-
+    `select l.* from movies m join movie_language ml on m.movie_id = ml.movie_ID 
+    join language l on l.lang_id = ml.language_ID where m.movie_id = ?`;
   connection.query(query, [movieId], (err, results) => {
     if (!err) {
       if (results.length > 0) {
@@ -109,7 +86,10 @@ router.get("/actors/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
   const query =
-    "select mp.* from movies m join actors a on a.movie_id = m.movie_id join movie_persons mp on mp.movie_person_id = a.movie_person_id where m.movie_id = ?";
+    `select mp.* from movies m 
+    join actors a on a.movie_id = m.movie_id 
+    join movie_persons mp on mp.movie_person_id = a.movie_person_id 
+    where m.movie_id = ?`;
 
   connection.query(query, [movieId], (err, results) => {
     if (!err) {
@@ -129,7 +109,8 @@ router.get("/producer/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 
   const query =
-    "select mp.* from movies m join producers p on p.movie_id = m.movie_id join movie_persons mp on mp.movie_person_id = p.movie_person_id where m.movie_id = ? ";
+    `select mp.* from movies m join producers p on p.movie_id = m.movie_id 
+    join movie_persons mp on mp.movie_person_id = p.movie_person_id where m.movie_id = ? `;
 
   connection.query(query, [movieId], (err, results) => {
     if (!err) {
@@ -148,20 +129,11 @@ router.get("/producer/:movieId", (req, res, next) => {
 router.post("/create", (req, res, next) => {
   let movies = req.body;
   var query =
-    "insert into movies (title,poster_url,description,director,duration,release_date,end_date,is_completed,admin_id) values(?,?,?,?,?,?,?,?,?)";
-  connection.query(
-    query,
-    [
-      movies.title,
-      movies.poster_url,
-      movies.description,
-      movies.director,
-      movies.duration,
-      movies.release_date,
-      movies.end_date,
-      movies.is_completed,
-      movies.admin_id,
-    ],
+    `insert into movies 
+    (title,poster_url,description,director,duration,release_date,end_date,is_completed,admin_id) 
+    values(?,?,?,?,?,?,?,?,?)`;
+  connection.query(query,[movies.title,movies.poster_url,movies.description,movies.director,movies.duration,
+      movies.release_date,movies.end_date,movies.is_completed,movies.admin_id,],
     (err, results) => {
       if (!err) {
         return res

@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-// import "../Styling/view_movies.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-
-const url = "http://localhost:8080/showtime";
 
 const ShowtimeList = () => {
   const [showtimes, setShowtime] = useState([]);
-  const [movieNames, setMovieNames] = useState({});
-  const arrayMovies = [];
   const navigate = useNavigate();
   useEffect(() => {
     Axios.get(`http://localhost:8080/st/get`).then((response) => {
-      setShowtime(response.data);
+      // setShowtime(response.data);
+      console.log(response)
     });
   }, []);
 
   const handleEdit = (showId) => {
-    console.log(showId);
     navigate(`/edit-showtime/${showId}`);
   };
 
@@ -67,6 +61,7 @@ const ShowtimeList = () => {
                     <img
                       style={{ width: "25px" }}
                       src="https://www.svgrepo.com/show/503019/edit.svg"
+                      alt=""
                     />
                   </button>
                   <button
@@ -76,6 +71,7 @@ const ShowtimeList = () => {
                     <img
                       style={{ width: "25px" }}
                       src="https://www.svgrepo.com/show/490950/delete.svg"
+                      alt=""
                     />
                   </button>
                 </div>

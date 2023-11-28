@@ -23,7 +23,6 @@ const Reservation = () => {
       `http://localhost:8080/ticket/reserve`,{booking_date,total_amount,num_tickets,user_id,showtime_id,decodedObject})
       .then((response) => {
         setReserved(response.data);
-        console.log(response.data,"reserved")
       })
       .catch((error) => console.error(error));
 }, []);

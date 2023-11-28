@@ -5,13 +5,10 @@ import { useNavigate } from "react-router-dom";
 const MovieCard = ({ movie, location }) => {
   const navigate = useNavigate();
   const loc = location;
-  console.log(movie, loc);
   const handleDetailsClick = (movieId) => {
-    console.log(movieId);
     navigate(`/user/movieDetails/${movie.movie_id}`);
   };
   const handleMovieCardClick = () => {
-    console.log(loc, movie.movie_id);
     navigate(`/user/theaters/${loc}/${movie.movie_id}`);
   };
 

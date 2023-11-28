@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useParams } from "react-router-dom";
-import ActorCard from "./actors";
-import ProducerCard from "./producers";
-import { useNavigate } from "react-router-dom";
 import "../Styling/movie_details.css";
-// import TheaterCard from "./theaterCard";
 import ShowTimeCard from "./showtime_card";
 
 const ShowTimesTheater = () => {
   const { loc, movieId, theaterId, theaterName } = useParams();
-  // console.log(loc, movieId, theaterId, theaterName);
-  const navigate = useNavigate();
-  const [theaters, setTheaters] = useState();
   const [showTime, setShowTime] = useState();
   const [blink, setBlink] = useState(true);
 
@@ -27,7 +20,6 @@ const ShowTimesTheater = () => {
     opacity: blink ? 1 : 0,
     transition: "opacity 1s linear",
   };
-  //   console.log(movieId, movieID);
   useEffect(() => {
     // Fetch movie details based on movieId
     Axios.get(
@@ -35,7 +27,6 @@ const ShowTimesTheater = () => {
     )
       .then((response) => {
         setShowTime(response.data);
-        // console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, []);

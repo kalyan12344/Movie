@@ -34,9 +34,7 @@ const AddTheater = () => {
       location_id: location_id,
     };
     console.log("request body is here", theater);
-    Axios.post(`${url}/create`, theater).then((response) => {
-      console.log(response);
-    });
+    Axios.post(`${url}/create`, theater).then((response) => {});
   };
 
   return (

@@ -19,7 +19,6 @@ const LocationList = () => {
   }, []);
 
   const handleEdit = (locationId) => {
-    console.log(locationId);
     navigate(`/edit-location/${locationId}`);
   };
 

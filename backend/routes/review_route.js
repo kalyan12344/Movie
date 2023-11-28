@@ -15,7 +15,6 @@ router.get("/get/:movie_id", (req, res, next) => {
 router.post("/create", (req, res, next) => {
   let review = req.body;
   review.review_date=new Date()
-  console.log(review)
   var query = "insert into review(movie_rating,comment,review_date,user_id,movie_id) values(?,?,?,?,?)";
   connection.query(
     query,
