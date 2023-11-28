@@ -21,6 +21,7 @@ router.get("/getTheatersInLoc/:selectedLocation/:movieID", (req, res, next) => {
     if (!err) {
       if (results.length > 0) {
         const theater = results;
+
         res.status(200).json(theater);
       } else {
         res.status(404).json({ message: "theaters not found" });

@@ -2,10 +2,9 @@ const express = require("express");
 const connection = require("../config/database");
 const router = express.Router();
 router.get("/get", (req, res, next) => {
-  const query =
-    "select * from movies m join show_time s on s.movie_id = m.movie_id";
+  const query = "select * from parking_area where theater_id = ?";
 
-  connection.query(query, (err, results) => {
+  connection.query(query, [], (err, results) => {
     if (!err) {
       if (results.length > 0) {
         const genre = results;

@@ -46,15 +46,37 @@ create table reservations(reservation_id int auto_increment primary key, booking
 FOREIGN KEY (showtime_id) REFERENCES show_time(show_time_id),
 foreign key (user_id) references user(user_id));
 
--- first create reservations table and then tickets table.
 
 create table tickets(ticket_id int auto_increment primary key, ticket_price int, showtime_id int, seat_id int,reservation_id int
 , foreign key(showtime_id) references show_time(show_time_id),
 foreign key(seat_id) references seat(seat_id),
 foreign key(reservation_id) references reservations(reservation_id));
 
-create table coupons(coupon_id int auto_increment primary key, coupon_name varchar(50), coupon_discount int, is_expired boolean, admin_id int , foreign key(admin_id) references admin(admin_id));
-create table user_coupon(uc_id int auto_increment primary key, user_id int, coupon_id int,is_used boolean, foreign key(user_id) references user(user_id),foreign key(coupon_id) references coupons(coupon_id));
 
 
+CREATE TABLE parking_area (
+    parking_area_ID INT NOT NULL AUTO_INCREMENT,
+    parking_area_name VARCHAR(255) NOT NULL,
+    capacity INT,
+    instructions TEXT,
+    theater_id INT,
+    PRIMARY KEY (parking_area_ID),
+    FOREIGN KEY (theater_id) REFERENCES theater(theater_id)
+);
 
+
+CREATE TABLE language (
+    lang_id INT NOT NULL AUTO_INCREMENT,
+    lang_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (lang_id)
+);
+
+CREATE TABLE movie_language (
+    movie_lang_ID INT NOT NULL AUTO_INCREMENT,
+    have_subtitles BOOLEAN,
+    movie_ID INT,
+    language_ID INT,
+    PRIMARY KEY (movie_lang_ID),
+    FOREIGN KEY (movie_ID) REFERENCES movies(movie_ID),
+    FOREIGN KEY (language_ID) REFERENCES language(lang_id)
+);

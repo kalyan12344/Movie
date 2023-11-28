@@ -36,6 +36,20 @@ router.get("/get/user/:user_id", (req, res, next) => {
     }
   });
 });
+
+router.get("/set/:user_id/:coupon_id", (req, res, next) => {
+  coupon_id=req.params.coupon_id
+  user_id=req.params.user_id
+  var query = `update user_coupon uc set is_used=1 where uc.coupon_id=${coupon_id} and uc.user_id=${user_id}`;
+  connection.query(query, (err, results) => {
+    if (!err) {
+      return res.status(200).json(results);
+    } else {
+      return res.status(500).json(err);
+    }
+  });
+});
+
 router.post("/create", (req, res, next) => {
   const admin_id = req.body.admin_id;
   const coupon_discount = req.body.coupon_discount;

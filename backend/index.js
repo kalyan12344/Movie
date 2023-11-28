@@ -11,9 +11,12 @@ const ticketRouter = require("./routes/ticket_router");
 const couponRouter = require("./routes/coupon_route");
 const stRouter = require("./routes/st_router");
 const parkingRouter = require("./routes/parking_router");
+
+const reviewRouter = require("./routes/review_route");
+
 const app = express();
 var cors = require("cors");
-app.use(cors()); // Use this after the variable declaration
+app.use(cors());
 require("dotenv").config();
 
 const port = process.env.PORT || 8080;
@@ -34,5 +37,7 @@ app.use("/ticket", ticketRouter);
 app.use("/coupon", couponRouter);
 app.use("/st", stRouter);
 app.use("/parking", parkingRouter);
+
+app.use("/review", reviewRouter);
 
 module.exports = app;

@@ -3,6 +3,7 @@ import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../Styling/seating.css";
 import secureLocalStorage from "react-secure-storage";
+import Modal from 'react-modal';
 
 const SeatsBooking = () => {
   const { showtime_id } = useParams();
@@ -14,8 +15,84 @@ const SeatsBooking = () => {
   const updateUrl = "http://localhost:8080/seat/update";
   const couponUrl = "http://localhost:8080/coupon/get"
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  // const url = "http://localhost:8080/coupon";
+  const user_id=secureLocalStorage.getItem("user_id")
+  const [couponData, setCoupons] = useState([]);
+  const[couponDiscount,setDiscount]=useState(0);
+  const [total_price,setTotalPrice]=useState(0)
+  const [coupon_id,setCouponId]=useState([])
+  const handleSelectionChange = (couponId,coupon_discount) => {
+    setSelectedCoupon(couponId);
+    console.log(coupon_discount)
+    setDiscount((prevCouponDiscount) => {
+      console.log(coupon_discount); // Log the new coupon_discount
+      return coupon_discount;
+    });
+    // console.log(couponId)
+    setCouponId(couponId)
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    Navigation()
+  };
+  const Navigation=(DiscountedPrice)=>{
+    const confirmationMessage = `For booking of the seats: ${selectedSeats
+      .map((seat) => seat.seat_name)
+      .join(", ")} The toal price is ${DiscountedPrice} `;
+    if (window.confirm(confirmationMessage)) {
+      Axios.post(updateUrl, { showtime_id, selectedSeats })
+        .then((response) => {
+          console.log(response);
+          // Handle success, e.g., navigate to the booking page
+          // alert('Booking successful! Redirecting to booking page...');
+        })
+        .catch((error) => {
+          console.error("Error updating seats:", error);
+        });
+      alert("Booking confirmed! Redirecting to booking page...");
+      const encodedObject = encodeURIComponent(
+        JSON.stringify(selectedSeats)
+      );
+      Axios.get(`http://localhost:8080/coupon/set/${user_id}/${coupon_id}`)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => console.log(err));
+      navigate(
+        `/reservation/${showtime_id}/${DiscountedPrice}/${encodedObject}`
+      );
+    } else {
+      // If the user clicks "Cancel" in the confirmation dialog,
+      // you can handle it here, for example, showing a message.
+      alert("Booking canceled.");
+    }
+  }
+  const couponUseModal=()=>{
+    setModalIsOpen(false);
+    console.log(couponDiscount)
+    const DiscountedPrice=(total_price-(total_price*couponDiscount/100))
+    console.log(DiscountedPrice,"total price updated")
+    Navigation(DiscountedPrice)
+   
+
+  }
+
+
   useEffect(() => {
     loadData();
+    Axios.get(`http://localhost:8080/coupon/get/user/${user_id}`)
+    .then((response) => {
+      setCoupons(response.data);
+      console.log(response.data)
+    })
+    .catch((err) => console.log(err));
   }, []);
 
   const loadData = () => {
@@ -52,7 +129,7 @@ const SeatsBooking = () => {
   const SeatLayout = ({ seats, onSeatSelect }) => {
     const availableSeats = seats.filter((seat) => !seat.is_selected);
 
-    return (
+    return (<>
       <div className="seat-layout">
         {availableSeats.map((seat, index) => (
           <Seat
@@ -63,6 +140,49 @@ const SeatsBooking = () => {
           />
         ))}
       </div>
+      <div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        contentLabel="Coupon Selection Modal"
+        style={{
+          content: {
+            width: '75%', // Adjust the width as needed
+            height:'50%',
+            margin: 'auto', // Center the modal horizontally
+          },
+        }}
+      >
+        <h2>Choose a Coupon:</h2>
+        {couponData.map((coupon) => (
+          <div key={coupon.coupon_id}>
+            <input
+              type="radio"
+              id={coupon.coupon_id}
+              name="coupon"
+              value={coupon.coupon_id}
+              checked={selectedCoupon === coupon.coupon_id}
+              onChange={() => handleSelectionChange(coupon.coupon_id,coupon.coupon_discount)}
+            />
+            <label htmlFor={coupon.coupon_id}>
+              {coupon.coupon_name} - {coupon.coupon_discount}% Discount
+            </label>
+          </div>
+        ))}
+        
+        {selectedCoupon && (
+          <p>
+            Selected Coupon: {couponData.find((coupon) => coupon.coupon_id === selectedCoupon).coupon_name} -{' '}
+            {couponData.find((coupon) => coupon.coupon_id === selectedCoupon).coupon_discount}% Discount
+          </p>
+        )}
+        <button onClick={couponUseModal}>Book Now</button>
+        <button onClick={closeModal}>Cancel</button>
+      </Modal>
+    </div>
+      </>
     );
   };
   const handleSeatSelect = (selectedSeat) => {
@@ -89,9 +209,9 @@ const SeatsBooking = () => {
         selectedSeats,
       }).then((response) => {
         console.log(response);
-        var total_price = response.data[0].total_price;
+       setTotalPrice(response.data[0].total_price);
         if (total_price == null) {
-          total_price = 0;
+          setTotalPrice(0);
         }
         const user_id = secureLocalStorage.getItem("user_id");
         Axios.get(`${couponUrl}/user/${user_id}`)
@@ -99,41 +219,47 @@ const SeatsBooking = () => {
             if (response.data) {
               const msg = 'You have coupons do you want to use it?'
               if (window.confirm(msg)) {
-
+                // coupons code 
+                setModalIsOpen(true);
+                console.log("inside cofirm")
+                return
+                // navigate('/user/setCoupon')
               }
-
               const confirmationMessage = `For booking of the seats: ${selectedSeats
-                .map((seat) => seat.seat_name)
-                .join(", ")} The toal price is ${total_price} `;
-              if (window.confirm(confirmationMessage)) {
-                Axios.post(updateUrl, { showtime_id, selectedSeats })
-                  .then((response) => {
-                    console.log(response);
-                    // Handle success, e.g., navigate to the booking page
-                    // alert('Booking successful! Redirecting to booking page...');
-                  })
-                  .catch((error) => {
-                    console.error("Error updating seats:", error);
-                  });
-                alert("Booking confirmed! Redirecting to booking page...");
-                const encodedObject = encodeURIComponent(
-                  JSON.stringify(selectedSeats)
-                );
-                navigate(
-                  `/reservation/${showtime_id}/${total_price}/${encodedObject}`
-                );
-              } else {
-                // If the user clicks "Cancel" in the confirmation dialog,
-                // you can handle it here, for example, showing a message.
-                alert("Booking canceled.");
+                  .map((seat) => seat.seat_name)
+                  .join(", ")} The toal price is ${total_price} `;
+                if (window.confirm(confirmationMessage)) {
+                  Axios.post(updateUrl, { showtime_id, selectedSeats })
+                    .then((response) => {
+                      console.log(response);
+                      // Handle success, e.g., navigate to the booking page
+                      // alert('Booking successful! Redirecting to booking page...');
+                    })
+                    .catch((error) => {
+                      console.error("Error updating seats:", error);
+                    });
+                  alert("Booking confirmed! Redirecting to booking page...");
+                  const encodedObject = encodeURIComponent(
+                    JSON.stringify(selectedSeats)
+                  );
+                  navigate(
+                    `/reservation/${showtime_id}/${total_price}/${encodedObject}`
+                  );
+                } else {
+                  // If the user clicks "Cancel" in the confirmation dialog,
+                  // you can handle it here, for example, showing a message.
+                  alert("Booking canceled.");
+                }
               }
-            }
+
+
+             
           })
           .catch((error) => {
             console.error("Error fetching seat data:", error);
           });
 
-       
+
       });
     } else {
       alert("Please select at least one seat.");

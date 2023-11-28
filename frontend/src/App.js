@@ -77,6 +77,7 @@ function App() {
             path="/user/showtimetheater/:loc/:movieId/:theaterId/:theaterName"
             element={<ShowTimesTheater />}
           />
+
           <Route path="/admin/coupon" element={<Coupon />} />
           <Route path="/admin/addCoupon" element={<AddCoupon />} />
           <Route path="/admin/viewCoupon" element={<CouponList />} />

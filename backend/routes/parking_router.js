@@ -10,6 +10,7 @@ router.get("/get/:theaterId", (req, res, next) => {
     if (!err) {
       if (results.length > 0) {
         const parking = results;
+
         res.status(200).json(parking);
       } else {
         res.status(404).json({ message: "Movie not found" });
