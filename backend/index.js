@@ -10,7 +10,7 @@ const seat = require("./routes/seat");
 const ticketRouter = require("./routes/ticket_router");
 const couponRouter = require("./routes/coupon_route");
 const stRouter = require("./routes/st_router");
-
+const parkingRouter = require("./routes/parking_router");
 const app = express();
 var cors = require("cors");
 app.use(cors()); // Use this after the variable declaration
@@ -33,5 +33,6 @@ app.use("/seat", seat);
 app.use("/ticket", ticketRouter);
 app.use("/coupon", couponRouter);
 app.use("/st", stRouter);
+app.use("/parking", parkingRouter);
 
 module.exports = app;

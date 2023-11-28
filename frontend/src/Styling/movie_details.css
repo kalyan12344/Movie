@@ -1,39 +1,81 @@
-h2 {
-  font-size: 24px;
+.movie-details-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  width: 100vw;
+  margin-top: 20px;
+}
+
+.movie-info {
   margin-bottom: 20px;
 }
 
-.button-container {
+.movie-header {
   display: flex;
-  justify-content: center;
-}
-
-.action-button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #0056b3; /* Blue color, you can change it as per your preference */
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.action-button:hover {
-  background-color: #0473e9; /* Darker blue on hover */
-}
-
-.link-text {
-  color: white;
-  text-decoration: none;
-}
-
-.head-back {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.head-back img {
-  width: 50px;
-  height: 50px;
+.movie-title {
+  margin: 0;
+  color: #333;
+}
+
+.back-icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.movie-description {
+  font-size: 16px;
+  color: #555;
+}
+
+.movie-director {
+  color: #666;
+  font-style: italic;
+}
+
+/* Styles for languages, genre, cast, and producer lists */
+.movie-list h1 {
+  color: #444;
+  font-size: 22px;
+}
+
+.movie-list h2 {
+  color: #666;
+  font-size: 18px;
+  margin-left: 15px;
+}
+.genre-list,
+.language-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* Space between bubbles */
+}
+
+.genre-bubble,
+.language-bubble {
+  background-color: #f5ac4c3f; /* Bubble background color */
+  color: #000;
+  padding: 5px 15px; /* Padding inside bubbles */
+  border-radius: 10px; /* Rounded edges for bubbles */
+  font-size: 0.9em;
+  text-align: center;
+  margin: 2px 0; /* Margin around bubbles */
+}
+
+.movie-producers,
+.movie-cast {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+}
+
+.producer-list,
+.actor-list {
+  display: flex;
+  flex-wrap: wrap;
 }

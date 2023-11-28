@@ -85,6 +85,26 @@ router.get("/genre/:movieId", (req, res, next) => {
   });
 });
 
+router.get("/lang/:movieId", (req, res, next) => {
+  const movieId = req.params.movieId;
+
+  const query =
+    "select l.* from movies m join movie_language ml on m.movie_id = ml.movie_ID join language l on l.lang_id = ml.language_ID where m.movie_id = ?";
+
+  connection.query(query, [movieId], (err, results) => {
+    if (!err) {
+      if (results.length > 0) {
+        const genre = results;
+        res.status(200).json(genre);
+      } else {
+        res.status(404).json({ message: "genre not found" });
+      }
+    } else {
+      res.status(500).json(err);
+    }
+  });
+});
+
 router.get("/actors/:movieId", (req, res, next) => {
   const movieId = req.params.movieId;
 

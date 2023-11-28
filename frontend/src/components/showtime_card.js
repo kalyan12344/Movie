@@ -7,7 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const ShowTimeCard = ({ showtime }) => {
   const navigate = useNavigate();
   const show_time = showtime;
-  console.log(show_time);
+  // console.log(show_time);
 
   const handleShowTimeClick = (showTime) => {
     navigate(`/seats/${showTime.show_time_id}`);

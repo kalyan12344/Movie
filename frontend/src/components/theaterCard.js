@@ -1,4 +1,4 @@
-import "../Styling/theaterCard.css";
+import "../Styling/theaCard.css";
 // import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
@@ -9,6 +9,23 @@ const TheaterCard = ({ theater, movieId, loc }) => {
   const [showTime, setShowTime] = useState();
   const theaterId = theater.theater_id;
   const theaterName = theater.theater_name;
+  const [parkingDetails, setParkingDetails] = useState();
+
+  let parkingCapacity =
+    parkingDetails && parkingDetails.length > 0
+      ? parkingDetails[0].capacity
+      : "N/A";
+
+  useEffect(() => {
+    Axios.get(`http://localhost:8080/parking/get/${theaterId}`)
+      .then((response) => {
+        setParkingDetails(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => console.error(error));
+  }, [theaterId]);
+
+  console.log(parkingDetails);
 
   const handleMovieCardClick = (theater) => {
     console.log(theater, movieId, loc);
@@ -23,6 +40,7 @@ const TheaterCard = ({ theater, movieId, loc }) => {
 
       <div className="theater-details">
         <h3>{theater.theater_name}</h3>
+        <h6>Total Parking Slots : {parkingCapacity}</h6>
       </div>
     </div>
   );

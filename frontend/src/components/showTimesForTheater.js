@@ -10,7 +10,7 @@ import ShowTimeCard from "./showtime_card";
 
 const ShowTimesTheater = () => {
   const { loc, movieId, theaterId, theaterName } = useParams();
-  console.log(loc, movieId, theaterId, theaterName);
+  // console.log(loc, movieId, theaterId, theaterName);
   const navigate = useNavigate();
   const [theaters, setTheaters] = useState();
   const [showTime, setShowTime] = useState();
@@ -35,7 +35,7 @@ const ShowTimesTheater = () => {
     )
       .then((response) => {
         setShowTime(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => console.error(error));
   }, []);
