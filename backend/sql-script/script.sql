@@ -56,5 +56,7 @@ foreign key(reservation_id) references reservations(reservation_id));
 create table coupons(coupon_id int auto_increment primary key, coupon_name varchar(50), coupon_discount int, is_expired boolean, admin_id int , foreign key(admin_id) references admin(admin_id));
 create table user_coupon(uc_id int auto_increment primary key, user_id int, coupon_id int,is_used boolean, foreign key(user_id) references user(user_id),foreign key(coupon_id) references coupons(coupon_id));
 
+create table review(review_id int auto_increment primary key, movie_rating float, comment varchar(100),review_date date, user_id int, movie_id int, 
+foreign key(user_id) references user(user_id),foreign key(movie_id) references movies(movie_id))
 
 

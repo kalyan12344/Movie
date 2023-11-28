@@ -9,6 +9,7 @@ const userdashMovies = require("./routes/userdash_router");
 const seat=require("./routes/seat")
 const ticketRouter=require("./routes/ticket_router");
 const couponRouter=require('./routes/coupon_route')
+const reviewRouter=require("./routes/review_route")
 
 const app = express();
 var cors = require("cors");
@@ -31,5 +32,6 @@ app.use("/userdash", userdashMovies);
 app.use("/seat", seat);
 app.use("/ticket",ticketRouter);
 app.use('/coupon',couponRouter);
+app.use("/review",reviewRouter);
 
 module.exports = app;

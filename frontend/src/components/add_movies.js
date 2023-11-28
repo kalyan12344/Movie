@@ -151,7 +151,7 @@ const AddMovie = () => {
           <button type="submit" className="submit-btn">
             Add Movie
           </button>
-          <button type="butoon" onClick={returnHome} className="button">
+          <button type="button" onClick={returnHome} className="button">
             Return Home
           </button>
         </div>

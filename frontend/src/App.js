@@ -71,6 +71,7 @@ function App() {
           <Route path="/admin/coupon"element={<Coupon />}/>
           <Route path="/admin/addCoupon"element={<AddCoupon />}/>
           <Route path="/admin/viewCoupon"element={<CouponList />}/>
+          
 
         </Routes>
       </BrowserRouter>
