@@ -6,7 +6,7 @@ import secureLocalStorage from "react-secure-storage";
 import Modal from 'react-modal';
 
 const SeatsBooking = () => {
-  const { showtime_id } = useParams();
+  const { showtime_id,available_seats } = useParams();
   const [seatData, setSeatData] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [updatedSeatData, setUpdated] = useState([]);
@@ -43,6 +43,13 @@ const SeatsBooking = () => {
         .then((response) => {
           // Handle success, e.g., navigate to the booking page
           // alert('Booking successful! Redirecting to booking page...');
+        })
+        .catch((error) => {
+          console.error("Error updating seats:", error);
+        });
+        const totalseats=available_seats-selectedSeats.length
+        Axios.post("http://localhost:8080/showtime/seats/update", { showtime_id, totalseats})
+        .then((response) => {
         })
         .catch((error) => {
           console.error("Error updating seats:", error);

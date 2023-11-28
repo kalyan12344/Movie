@@ -8,7 +8,7 @@ const ShowTimeCard = ({ showtime }) => {
   const show_time = showtime;
 
   const handleShowTimeClick = (showTime) => {
-    navigate(`/seats/${showTime.show_time_id}`);
+    navigate(`/seats/${showTime.show_time_id}/${showTime.available_seats}`);
   };
 
   return (

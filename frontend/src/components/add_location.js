@@ -31,6 +31,7 @@ const AddLocation = () => {
   return (
     <>
       <form onSubmit={locationSubmit}>
+      <h2>Add Location</h2>
         <div className="form-group">
           <label htmlFor="zipcode" className="label">
             Zipcode

@@ -37,6 +37,7 @@ const AddCoupon = () => {
    <br/>
     <div className="form-container">
       <form onSubmit={couponSubmit}>
+      <h2>Add Coupon</h2>
       <div className="mb-3">
         <label htmlFor="c_name" className="label">
           Coupon's Name
