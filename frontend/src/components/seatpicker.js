@@ -3,36 +3,35 @@ import Axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../Styling/seating.css";
 import secureLocalStorage from "react-secure-storage";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
 const SeatsBooking = () => {
-  const { showtime_id,available_seats } = useParams();
+  const { showtime_id, available_seats } = useParams();
   const [seatData, setSeatData] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [updatedSeatData, setUpdated] = useState([]);
   const navigate = useNavigate();
   const url = "http://localhost:8080/seat/get";
   const updateUrl = "http://localhost:8080/seat/update";
-  const couponUrl = "http://localhost:8080/coupon/get"
+  const couponUrl = "http://localhost:8080/coupon/get";
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState(null);
-  const user_id = secureLocalStorage.getItem("user_id")
+  const user_id = secureLocalStorage.getItem("user_id");
   const [couponData, setCoupons] = useState([]);
   const [couponDiscount, setDiscount] = useState(0);
-  const [total_price, setTotalPrice] = useState(0)
-  const [coupon_id, setCouponId] = useState([])
+  const [total_price, setTotalPrice] = useState(0);
+  const [coupon_id, setCouponId] = useState([]);
   const handleSelectionChange = (couponId, coupon_discount) => {
     setSelectedCoupon(couponId);
     setDiscount((prevCouponDiscount) => {
       return coupon_discount;
     });
-    setCouponId(couponId)
+    setCouponId(couponId);
   };
-
 
   const closeModal = () => {
     setModalIsOpen(false);
-    Navigation()
+    Navigation();
   };
   const Navigation = (DiscountedPrice) => {
     const confirmationMessage = `For booking of the seats: ${selectedSeats
@@ -47,20 +46,19 @@ const SeatsBooking = () => {
         .catch((error) => {
           console.error("Error updating seats:", error);
         });
-        const totalseats=available_seats-selectedSeats.length
-        Axios.post("http://localhost:8080/showtime/seats/update", { showtime_id, totalseats})
-        .then((response) => {
-        })
+      const totalseats = available_seats - selectedSeats.length;
+      Axios.post("http://localhost:8080/showtime/seats/update", {
+        showtime_id,
+        totalseats,
+      })
+        .then((response) => {})
         .catch((error) => {
           console.error("Error updating seats:", error);
         });
       alert("Booking confirmed! Redirecting to booking page...");
-      const encodedObject = encodeURIComponent(
-        JSON.stringify(selectedSeats)
-      );
+      const encodedObject = encodeURIComponent(JSON.stringify(selectedSeats));
       Axios.get(`http://localhost:8080/coupon/set/${user_id}/${coupon_id}`)
-        .then((response) => {
-        })
+        .then((response) => {})
         .catch((err) => console.log(err));
       navigate(
         `/reservation/${showtime_id}/${DiscountedPrice}/${encodedObject}`
@@ -70,22 +68,19 @@ const SeatsBooking = () => {
       // you can handle it here, for example, showing a message.
       alert("Booking canceled.");
     }
-  }
+  };
   const couponUseModal = () => {
     setModalIsOpen(false);
-    const DiscountedPrice = (total_price - (total_price * couponDiscount / 100))
-    Navigation(DiscountedPrice)
-
-
-  }
-
+    const DiscountedPrice = total_price - (total_price * couponDiscount) / 100;
+    Navigation(DiscountedPrice);
+  };
 
   useEffect(() => {
     loadData();
     Axios.get(`http://localhost:8080/coupon/get/user/${user_id}`)
       .then((response) => {
         setCoupons(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -123,59 +118,75 @@ const SeatsBooking = () => {
   const SeatLayout = ({ seats, onSeatSelect }) => {
     const availableSeats = seats.filter((seat) => !seat.is_selected);
 
-    return (<>
-      <div className="seat-layout">
-        {availableSeats.map((seat, index) => (
-          <Seat
-            key={index}
-            className={`seat`}
-            seatData={seat}
-            onSelectSeat={onSeatSelect}
-          />
-        ))}
-      </div>
-      <div>
-
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          ariaHideApp={false}
-          contentLabel="Coupon Selection Modal"
-          style={{
-            content: {
-              width: '75%', // Adjust the width as needed
-              height: '50%',
-              margin: 'auto', // Center the modal horizontally
-            },
-          }}
-        >
-          <h2>Choose a Coupon:</h2>
-          {couponData.map((coupon) => (
-            <div key={coupon.coupon_id}>
-              <input
-                type="radio"
-                id={coupon.coupon_id}
-                name="coupon"
-                value={coupon.coupon_id}
-                checked={selectedCoupon === coupon.coupon_id}
-                onChange={() => handleSelectionChange(coupon.coupon_id, coupon.coupon_discount)}
-              />
-              <label htmlFor={coupon.coupon_id}>
-                {coupon.coupon_name} - {coupon.coupon_discount}% Discount
-              </label>
-            </div>
+    return (
+      <>
+        <div className="seat-layout">
+          {availableSeats.map((seat, index) => (
+            <Seat
+              key={index}
+              className={`seat`}
+              seatData={seat}
+              onSelectSeat={onSeatSelect}
+            />
           ))}
+        </div>
+        <div>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            ariaHideApp={false}
+            contentLabel="Coupon Selection Modal"
+            style={{
+              content: {
+                width: "75%", // Adjust the width as needed
+                height: "50%",
+                margin: "auto", // Center the modal horizontally
+              },
+            }}
+          >
+            <h2>Choose a Coupon:</h2>
+            {couponData.map((coupon) => (
+              <div key={coupon.coupon_id}>
+                <input
+                  type="radio"
+                  id={coupon.coupon_id}
+                  name="coupon"
+                  value={coupon.coupon_id}
+                  checked={selectedCoupon === coupon.coupon_id}
+                  onChange={() =>
+                    handleSelectionChange(
+                      coupon.coupon_id,
+                      coupon.coupon_discount
+                    )
+                  }
+                />
+                <label htmlFor={coupon.coupon_id}>
+                  {coupon.coupon_name} - {coupon.coupon_discount}% Discount
+                </label>
+              </div>
+            ))}
 
-          {selectedCoupon && (
-            <p>
-              Selected Coupon: {couponData.find((coupon) => coupon.coupon_id === selectedCoupon).coupon_name} -{' '}
-              {couponData.find((coupon) => coupon.coupon_id === selectedCoupon).coupon_discount}% Discount
-            </p>
-          )}
-          <button onClick={couponUseModal}>Book Now</button>
-        </Modal>
-      </div>
-    </>
+            {selectedCoupon && (
+              <p>
+                Selected Coupon:{" "}
+                {
+                  couponData.find(
+                    (coupon) => coupon.coupon_id === selectedCoupon
+                  ).coupon_name
+                }{" "}
+                -{" "}
+                {
+                  couponData.find(
+                    (coupon) => coupon.coupon_id === selectedCoupon
+                  ).coupon_discount
+                }
+                % Discount
+              </p>
+            )}
+            <button onClick={couponUseModal}>Book Now</button>
+          </Modal>
+        </div>
+      </>
     );
   };
   const handleSeatSelect = (selectedSeat) => {
@@ -207,13 +218,13 @@ const SeatsBooking = () => {
         Axios.get(`${couponUrl}/user/${user_id}`)
           .then((response1) => {
             if (response1.data.length > 0) {
-              const msg = 'You have coupons do you want to use it?'
+              const msg = "You have coupons do you want to use it?";
               if (window.confirm(msg)) {
                 setModalIsOpen(true);
-                return
+                return;
               }
             }
-            Navigation(response.data[0].total_price)
+            Navigation(response.data[0].total_price);
           })
           .catch((error) => {
             console.error("Error fetching seat data:", error);
