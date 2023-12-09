@@ -5,10 +5,12 @@ create table location(location_id int not null auto_increment, zipcode int, city
 create table theater(theater_id int not null auto_increment, theater_name varchar(20), description varchar(100),theater_url text, admin_id int, location_id int, primary key(theater_id),foreign key(admin_id) references admin(admin_id),foreign key(location_id) references location(location_id));
 create table show_time(show_time_id int not null auto_increment, show_name varchar(20) not null, start_time time, end_time time, available_seats int, theater_id int, movie_id int, admin_id int, primary key(show_time_id), foreign key(theater_id) references theater(theater_id),foreign key(movie_id) references movies(movie_id), foreign key(admin_id) references admin(admin_id));
 CREATE TABLE movie_persons (
-    movie_person_id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_person_name VARCHAR(255) NOT NULL,
-    gender VARCHAR(10),
-    nationality VARCHAR(50)
+  movie_person_id int NOT NULL AUTO_INCREMENT,
+  movie_person_name varchar(255) NOT NULL,
+  gender varchar(10) DEFAULT NULL,
+  nationality varchar(50) DEFAULT NULL,
+  image_url text,
+  PRIMARY KEY (movie_person_id)
 );
 CREATE TABLE Genre (
     genre_id INT AUTO_INCREMENT PRIMARY KEY,
